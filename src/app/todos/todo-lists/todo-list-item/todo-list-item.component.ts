@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { TodoList } from '../../todo-list.model';
 
@@ -7,17 +7,11 @@ import { TodoList } from '../../todo-list.model';
   templateUrl: './todo-list-item.component.html',
   styleUrls: ['./todo-list-item.component.css']
 })
-export class TodoListItemComponent implements OnInit {
+export class TodoListItemComponent {
   @Input() todoList: TodoList;
   @Input() index: number;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   get openTodosCount() {
     return this.todoList.todos.filter(todo => !todo.completed).length;
   }
-
 }

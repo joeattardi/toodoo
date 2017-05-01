@@ -3,7 +3,7 @@ import { Todo } from './todo.model';
 
 export class TodosService {
   private todoLists = [
-    new TodoList('Inbox', [], 'glyphicon-inbox'),
+    new TodoList('Inbox', [], 'fa-inbox'),
     new TodoList('Home', []),
     new TodoList('Garden', [
       new Todo('Put down new mulch'),

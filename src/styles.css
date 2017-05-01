@@ -1,3 +1,7 @@
 body {
   background: url('assets/seigaiha.png');
 }
+
+button {
+  cursor: pointer;
+}

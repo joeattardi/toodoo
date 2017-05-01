@@ -8,4 +8,9 @@
 
 .toggle-completed {
   cursor: pointer;
+  line-height: 1em;
+}
+
+.todo-text {
+  margin-left: 0.25em;
 }

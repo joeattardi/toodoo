@@ -1,10 +1,8 @@
 <a
   [routerLink]="['/lists', index]"
   routerLinkActive="active"
-  class="list-group-item todo-list-item"
+  class="list-group-item list-group-item-action justify-content-between todo-list-item"
 >
-  <span [class]="'glyphicon ' + todoList.icon" aria-hidden="true"></span>
-  &nbsp;
-  <span class="badge">{{ openTodosCount }}</span>
-  {{ todoList.name }}
+  <span><i [class]="'fa ' + todoList.icon" aria-hidden="true"></i> {{ todoList.name }}</span>
+  <span *ngIf="openTodosCount > 0" class="badge badge-default badge-pill">{{ openTodosCount }}</span>
 </a>

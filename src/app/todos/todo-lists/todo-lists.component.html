@@ -1,4 +1,4 @@
-<div class="col-sm-3" id="todo-lists">
+<div>
   <h3>My Lists</h3>
   <div class="list-group">
     <app-todo-list-item
@@ -7,9 +7,8 @@
     ></app-todo-list-item>
   </div>
 
-  <button class="btn btn-primary" id="add-list">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  <button class="btn btn-primary" id="add-list" (click)="onAddClicked()">
+    <i class="fa fa-plus" aria-hidden="true"></i>
     Add New List
   </button>
-
 </div>

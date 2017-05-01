@@ -1,6 +1,10 @@
-<div class="app-content">
+<div class="container-fluid app-content">
   <div class="row">
-    <app-todo-lists></app-todo-lists>
-    <router-outlet></router-outlet>
+    <div class="col-4" id="todo-lists">
+      <app-todo-lists></app-todo-lists>
+    </div>
+    <div class="col">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

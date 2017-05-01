@@ -5,7 +5,7 @@ export class TodoList {
   icon: string;
   todos = [];
 
-  constructor(name: string, todos: Todo[], icon = 'glyphicon-th-list') {
+  constructor(name: string, todos: Todo[], icon = 'fa-list') {
     this.name = name;
     this.todos = todos;
     this.icon = icon;

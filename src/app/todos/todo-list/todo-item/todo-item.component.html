@@ -1,13 +1,13 @@
 <li class="list-group-item todo" [class.completed]="todo.completed">
-  <span
+  <i
     *ngIf="todo.completed"
-    class="glyphicon glyphicon-ok toggle-completed"
+    class="fa fa-lg fa-check-square-o toggle-completed"
     (click)="toggleTodo()"
-  ></span>
-  <span
+  ></i>
+  <i
     *ngIf="!todo.completed"
-    class="glyphicon glyphicon-unchecked toggle-completed"
+    class="fa fa-lg fa-square-o toggle-completed"
     (click)="toggleTodo()"
-  ></span>
+  ></i>
   <span class="todo-text">{{ todo.text }}</span>
 </li>

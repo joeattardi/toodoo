@@ -1,0 +1,27 @@
+<form #editForm="ngForm" (ngSubmit)="onEdit(editForm)">
+  <div class="modal-header">
+    <h4 class="modal-title">Edit List</h4>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="form-group">
+        <label for="name">List name</label>
+        <input type="text" class="form-control" id="name" name="name" #nameInput [(ngModel)]="name" required>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <ng-template #confirmDelete>
+      <div>Are you sure you want to delete the list <strong>{{ todoList.name }}</strong>?</div>
+      <button type="button" (click)="delete.close()" class="btn btn-secondary btn-sm">Cancel</button>
+      <button type="button" (click)="onDelete()" class="btn btn-danger btn-sm">Delete</button>
+    </ng-template>
+    <button type="button" class="btn btn-danger" #delete="ngbPopover" [ngbPopover]="confirmDelete">Delete List</button>
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!editForm.valid"
+    >Save</button>
+  </div>
+</form>

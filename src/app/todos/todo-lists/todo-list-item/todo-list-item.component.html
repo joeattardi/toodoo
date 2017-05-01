@@ -1,12 +1,14 @@
 <a
   [routerLink]="['/lists', index]"
   routerLinkActive="active"
+  (dblclick)="editList($event)"
   class="list-group-item list-group-item-action justify-content-between todo-list-item"
 >
-  <span><i [class]="'fa ' + todoList.icon" aria-hidden="true"></i> {{ todoList.name }}</span>
+  <span class="list-label"><i [class]="'fa ' + todoList.icon" aria-hidden="true"></i> {{ todoList.name }}</span>
   <div>
     <span *ngIf="openTodosCount > 0" class="badge badge-default badge-pill">{{ openTodosCount }}</span>
     <i
+      *ngIf="todoList.editable"
       (click)="editList($event)"
       class="fa fa-pencil"
       aria-hidden="true"

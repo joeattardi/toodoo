@@ -22,3 +22,10 @@ a:hover .fa-pencil:hover {
 .badge {
   margin-right: 0.25em;
 }
+
+.list-label {
+  max-width: 85%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

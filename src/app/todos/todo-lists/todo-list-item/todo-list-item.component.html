@@ -1,5 +1,10 @@
-<li class="list-group-item todo-list-item">
+<a
+  [routerLink]="['/lists', index]"
+  routerLinkActive="active"
+  class="list-group-item todo-list-item"
+>
   <span [class]="'glyphicon ' + todoList.icon" aria-hidden="true"></span>
-  <span class="badge">{{ todoList.todos.length }}</span>
+  &nbsp;
+  <span class="badge">{{ openTodosCount }}</span>
   {{ todoList.name }}
-</li>
+</a>

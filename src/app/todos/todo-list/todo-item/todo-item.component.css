@@ -1,0 +1,11 @@
+.completed {
+  color: #999999;
+}
+
+.completed .todo-text {
+  text-decoration: line-through;
+}
+
+.toggle-completed {
+  cursor: pointer;
+}

@@ -9,10 +9,15 @@ import { TodoList } from '../../todo-list.model';
 })
 export class TodoListItemComponent implements OnInit {
   @Input() todoList: TodoList;
+  @Input() index: number;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  get openTodosCount() {
+    return this.todoList.todos.filter(todo => !todo.completed).length;
   }
 
 }

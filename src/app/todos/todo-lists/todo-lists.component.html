@@ -1,10 +1,11 @@
-<div class="col-md-3" id="todo-lists">
-  <ul class="list-group">
+<div class="col-sm-3" id="todo-lists">
+  <h3>My Lists</h3>
+  <div class="list-group">
     <app-todo-list-item
-      *ngFor="let todoList of todoLists"
-      [todoList]="todoList"
+      *ngFor="let todoList of todoLists; let i = index"
+      [todoList]="todoList" [index]="i"
     ></app-todo-list-item>
-  </ul>
+  </div>
 
   <button class="btn btn-primary" id="add-list">
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

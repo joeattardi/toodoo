@@ -1,8 +1,24 @@
-.glyphicon {
+a .fa-pencil {
+  visibility: hidden;
+  color: #CCCCCC;
+}
+
+a:hover .fa-pencil {
+  visibility: visible;
+}
+
+a:hover .fa-pencil:hover {
+  color: #999999;
+}
+
+.fa {
   color: #999999;
 }
 
 .todo-list-item {
-  font-weight: bold;
   cursor: pointer;
+}
+
+.badge {
+  margin-right: 0.25em;
 }

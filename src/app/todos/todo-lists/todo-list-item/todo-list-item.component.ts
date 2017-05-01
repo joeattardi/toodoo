@@ -14,4 +14,9 @@ export class TodoListItemComponent {
   get openTodosCount() {
     return this.todoList.todos.filter(todo => !todo.completed).length;
   }
+
+  editList(event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
 }

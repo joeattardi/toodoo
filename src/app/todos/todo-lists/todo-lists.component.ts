@@ -14,7 +14,7 @@ export class TodoListsComponent {
   constructor(private todosService: TodosService, private modalService: NgbModal) { }
 
   onAddClicked() {
-    console.log(this.modalService.open(AddTodoListComponent));
+    this.modalService.open(AddTodoListComponent);
   }
 
   get todoLists() {

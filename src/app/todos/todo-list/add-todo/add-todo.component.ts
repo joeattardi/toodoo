@@ -13,7 +13,9 @@ export class AddTodoComponent {
   @Input() todoList: TodoList;
 
   addTodo(form: NgForm) {
-    this.todoList.todos.unshift(new Todo(form.value.text));
-    form.setValue({ text: '' });
+    if (form.valid) {
+      this.todoList.todos.unshift(new Todo(form.value.text));
+      form.setValue({ text: '' });
+    }
   }
 }

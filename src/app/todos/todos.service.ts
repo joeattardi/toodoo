@@ -19,4 +19,8 @@ export class TodosService {
   getTodoList(index) {
     return this.todoLists[index];
   }
+
+  addTodoList(list: TodoList) {
+    this.todoLists.push(list);
+  }
 }

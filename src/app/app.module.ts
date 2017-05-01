@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     { path: '', component: SelectListComponent },
     { path: ':index', component: TodoListComponent }
   ]},
-  { path: '', redirectTo: '/lists', pathMatch: 'full' }
+  { path: '', redirectTo: '/lists/0', pathMatch: 'full' }
 ];
 
 @NgModule({

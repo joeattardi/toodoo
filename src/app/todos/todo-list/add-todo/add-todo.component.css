@@ -1,5 +1,13 @@
 input {
-  width: 100%;
+  width: 95%;
   border: none;
   outline: none;
+}
+
+form {
+  width: 100%;
+}
+
+.fa-plus {
+  color: #AAAAAA;
 }

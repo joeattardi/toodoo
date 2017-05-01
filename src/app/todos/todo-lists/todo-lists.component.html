@@ -1,0 +1,14 @@
+<div class="col-md-3" id="todo-lists">
+  <ul class="list-group">
+    <app-todo-list-item
+      *ngFor="let todoList of todoLists"
+      [todoList]="todoList"
+    ></app-todo-list-item>
+  </ul>
+
+  <button class="btn btn-primary" id="add-list">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    Add New List
+  </button>
+
+</div>

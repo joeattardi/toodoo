@@ -1,0 +1,8 @@
+.glyphicon {
+  color: #999999;
+}
+
+.todo-list-item {
+  font-weight: bold;
+  cursor: pointer;
+}

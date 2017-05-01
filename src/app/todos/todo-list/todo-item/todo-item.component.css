@@ -1,4 +1,4 @@
-.completed {
+.completed .todo-text {
   color: #999999;
 }
 
@@ -13,4 +13,23 @@
 
 .todo-text {
   margin-left: 0.25em;
+  flex-grow: 1;
+}
+
+.todo-container {
+  width: 100%;
+}
+
+.todo-container .fa-pencil {
+  visibility: hidden;
+  cursor: pointer;
+  color: #CCCCCC;
+}
+
+.todo-container:hover .fa-pencil:hover {
+  color: #999999;
+}
+
+.todo-container:hover .fa-pencil {
+  visibility: visible;
 }

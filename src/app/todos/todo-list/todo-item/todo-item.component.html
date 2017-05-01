@@ -1,14 +1,23 @@
 <li class="list-group-item todo" [class.completed]="todo.completed">
-  <i
-    *ngIf="todo.completed"
-    class="fa fa-lg fa-check-square-o toggle-completed"
-    (click)="toggleTodo()"
-  ></i>
-  <i
-    *ngIf="!todo.completed"
-    class="fa fa-lg fa-square-o toggle-completed"
-    (click)="toggleTodo()"
-  ></i>
-  <span class="todo-text">{{ todo.text }}</span>
-  
+  <div class="d-flex flex-row justify-content-between todo-container">
+    <div class="toggle-completed-container">
+      <i
+        *ngIf="todo.completed"
+        class="fa fa-lg fa-check-square-o toggle-completed"
+        (click)="toggleTodo()"
+      ></i>
+      <i
+        *ngIf="!todo.completed"
+        class="fa fa-lg fa-square-o toggle-completed"
+        (click)="toggleTodo()"
+      ></i>
+    </div>
+    <div class="todo-text" (dblclick)="editTodo($event)">
+      {{ todo.text }}
+    </div>
+    <i
+      class="fa fa-pencil align-self-center"
+      (click)="editTodo($event)"
+    ></i>
+  </div>
 </li>

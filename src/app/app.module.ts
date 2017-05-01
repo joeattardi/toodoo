@@ -17,6 +17,7 @@ import { TodoItemComponent } from './todos/todo-list/todo-item/todo-item.compone
 import { AddTodoComponent } from './todos/todo-list/add-todo/add-todo.component';
 import { AddTodoListComponent } from './todos/todo-lists/add-todo-list/add-todo-list.component';
 import { EditTodoListComponent } from './todos/todo-lists/edit-todo-list/edit-todo-list.component';
+import { EditTodoComponent } from './todos/todo-list/edit-todo/edit-todo.component';
 
 const appRoutes: Routes = [
   { path: 'lists', component: TodosComponent, children: [
@@ -38,11 +39,13 @@ const appRoutes: Routes = [
     TodoItemComponent,
     AddTodoComponent,
     AddTodoListComponent,
-    EditTodoListComponent
+    EditTodoListComponent,
+    EditTodoComponent
   ],
   entryComponents: [
     AddTodoListComponent,
-    EditTodoListComponent
+    EditTodoListComponent,
+    EditTodoComponent
   ],
   imports: [
     BrowserModule,

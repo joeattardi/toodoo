@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
+import * as moment from 'moment';
 
 import { TodoList } from '../../todo-list.model';
 import { Todo } from '../../todo.model';
@@ -36,6 +37,11 @@ export class EditTodoComponent implements OnInit {
   onDelete() {
     this.todoList.todos = this.todoList.todos.filter(todo => todo !== this.todo);
     this.activeModal.close();
+  }
+
+  get isOverdue() {
+    return this.dueDate ? moment().isAfter(
+      new Date(this.dueDate.year, this.dueDate.month - 1, this.dueDate.day)) : false;
   }
 
   ngOnInit() {

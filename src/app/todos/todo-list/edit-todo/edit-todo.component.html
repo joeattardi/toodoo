@@ -4,6 +4,9 @@
   </div>
   <div class="modal-body">
     <div class="container-fluid">
+      <div *ngIf="isOverdue" class="alert alert-danger" role="alert">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> This todo is overdue.
+      </div>
       <div class="form-group d-flex">
         <div class="align-self-center">
           <app-toggle-todo [todo]="todo"></app-toggle-todo>

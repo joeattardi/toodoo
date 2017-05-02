@@ -7,7 +7,8 @@ export class TodosService {
     new TodoList('Home', []),
     new TodoList('Garden', [
       new Todo('Put down new mulch', false, new Date(2017, 5, 25)),
-      new Todo('Pick up branches', true)
+      new Todo('Pick up branches', true),
+      new Todo('Plant flowers', false, new Date(2017, 3, 10))
     ]),
     new TodoList('Work', [])
   ];

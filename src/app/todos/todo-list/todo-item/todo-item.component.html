@@ -1,9 +1,9 @@
-<li class="list-group-item todo" [class.completed]="todo.completed">
+<li class="list-group-item todo" [class.completed]="todo.completed" [class.overdue]="todo.isOverdue() && !todo.completed">
   <div class="d-flex flex-row justify-content-between todo-container">
     <div class="align-self-center"><app-toggle-todo [todo]="todo"></app-toggle-todo></div>
     <div class="todo-text d-flex flex-column justify-content-center" (dblclick)="editTodo($event)">
       <div>{{ todo.text }}</div>
-      <small>{{ todo.dueDate | date }}</small>
+      <small class="due-date">{{ todo.dueDate | date }}</small>
     </div>
     <i
       class="fa fa-pencil align-self-center"

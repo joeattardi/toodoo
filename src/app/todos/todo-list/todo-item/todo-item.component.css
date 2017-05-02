@@ -33,3 +33,20 @@
 .todo-container:hover .fa-pencil {
   visibility: visible;
 }
+
+.todo {
+  border-left: 5px solid #999999;
+}
+
+.due-date {
+  color: #999999;
+  font-size: 0.7em;
+}
+
+.overdue .due-date {
+  color: red;
+}
+
+.overdue {
+  border-left: 5px solid red;
+}

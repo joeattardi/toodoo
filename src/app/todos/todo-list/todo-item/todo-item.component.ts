@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { EditTodoComponent } from '../edit-todo/edit-todo.component';
 import { Todo } from '../../todo.model';
+import { TodoList } from '../../todo-list.model';
 
 @Component({
   selector: 'app-todo-item',
@@ -10,7 +11,8 @@ import { Todo } from '../../todo.model';
   styleUrls: ['./todo-item.component.css']
 })
 export class TodoItemComponent {
-  @Input() todo: Todo
+  @Input() todo: Todo;
+  @Input() todoList: TodoList;
 
   constructor(private modalService: NgbModal) { }
 
@@ -23,5 +25,7 @@ export class TodoItemComponent {
     event.preventDefault();
 
     const modalRef = this.modalService.open(EditTodoComponent);
+    modalRef.componentInstance.todo = this.todo;
+    modalRef.componentInstance.todoList = this.todoList;
   }
 }

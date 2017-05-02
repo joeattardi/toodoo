@@ -1,19 +1,9 @@
 <li class="list-group-item todo" [class.completed]="todo.completed">
   <div class="d-flex flex-row justify-content-between todo-container">
-    <div class="toggle-completed-container">
-      <i
-        *ngIf="todo.completed"
-        class="fa fa-lg fa-check-square-o toggle-completed"
-        (click)="toggleTodo()"
-      ></i>
-      <i
-        *ngIf="!todo.completed"
-        class="fa fa-lg fa-square-o toggle-completed"
-        (click)="toggleTodo()"
-      ></i>
-    </div>
-    <div class="todo-text" (dblclick)="editTodo($event)">
-      {{ todo.text }}
+    <div class="align-self-center"><app-toggle-todo [todo]="todo"></app-toggle-todo></div>
+    <div class="todo-text d-flex flex-column justify-content-center" (dblclick)="editTodo($event)">
+      <div>{{ todo.text }}</div>
+      <small>{{ todo.dueDate | date }}</small>
     </div>
     <i
       class="fa fa-pencil align-self-center"

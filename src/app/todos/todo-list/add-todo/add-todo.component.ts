@@ -15,7 +15,7 @@ export class AddTodoComponent {
   addTodo(form: NgForm) {
     if (form.valid) {
       this.todoList.todos.unshift(new Todo(form.value.text));
-      form.setValue({ text: '' });
+      form.reset();
     }
   }
 }

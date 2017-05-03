@@ -27,6 +27,8 @@ export class TodoItemComponent {
     event.stopPropagation();
     event.preventDefault();
 
+    document.getElementById('add-todo-text').blur();
+    
     const modalRef = this.modalService.open(EditTodoComponent);
     modalRef.componentInstance.todo = this.todo;
     modalRef.componentInstance.todoList = this.todoList;

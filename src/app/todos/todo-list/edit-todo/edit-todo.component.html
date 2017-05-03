@@ -43,6 +43,17 @@
           </div>
         </div>
       </div>
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea
+          class="form-control"
+          name="notes"
+          id="notes"
+          rows="4"
+          [(ngModel)]="notes"
+          #notesInput="ngModel"
+        ></textarea>
+      </div>
     </div>
   </div>
   <div class="modal-footer">

@@ -18,6 +18,7 @@ export class EditTodoComponent implements OnInit {
 
   text: string;
   dueDate: { year: number, month: number, day: number };
+  notes: string;
 
   constructor(private activeModal: NgbActiveModal) { }
 
@@ -26,10 +27,11 @@ export class EditTodoComponent implements OnInit {
   }
 
   onEdit(editForm: NgForm) {
-    this.todo.text = editForm.value.text;
+    this.todo.text = this.text;
     if (this.dueDate) {
       this.todo.dueDate = new Date(this.dueDate.year, this.dueDate.month - 1, this.dueDate.day);
     }
+    this.todo.notes = this.notes;
 
     this.activeModal.close();
   }
@@ -46,6 +48,7 @@ export class EditTodoComponent implements OnInit {
 
   ngOnInit() {
     this.text = this.todo.text;
+    this.notes = this.todo.notes;
 
     if (this.todo.dueDate) {
       this.dueDate = {

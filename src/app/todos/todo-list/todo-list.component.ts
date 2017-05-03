@@ -10,8 +10,8 @@ import { TodoList } from '../todo-list.model';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  private todoList: TodoList
-  private showCompletedTodos = false;
+  todoList: TodoList;
+  showCompletedTodos = false;
 
   constructor(private route: ActivatedRoute, private todosService: TodosService) { }
 

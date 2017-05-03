@@ -13,7 +13,7 @@ import { Priority } from '../../priority.enum';
 })
 export class TodoItemComponent {
   @Input() todo: Todo;
-  @Input() todoList: TodoList
+  @Input() todoList: TodoList;
 
   priorityEnum = Priority;
 

@@ -23,7 +23,7 @@ export class TodoListItemComponent {
     if (!this.todoList.editable) {
       return;
     }
-    
+
     event.stopPropagation();
     event.preventDefault();
 

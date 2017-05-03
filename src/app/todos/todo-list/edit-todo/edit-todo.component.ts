@@ -5,6 +5,7 @@ import * as moment from 'moment';
 
 import { TodoList } from '../../todo-list.model';
 import { Todo } from '../../todo.model';
+import { Priority } from '../../priority.enum';
 
 @Component({
   selector: 'app-edit-todo',
@@ -16,7 +17,10 @@ export class EditTodoComponent implements OnInit {
   @Input() todoList: TodoList;
   @ViewChild('textInputEl') textInput: ElementRef;
 
+  priorityEnum: Priority;
+
   text: string;
+  priority: Priority;
   dueDate: { year: number, month: number, day: number };
   notes: string;
 
@@ -32,6 +36,7 @@ export class EditTodoComponent implements OnInit {
       this.todo.dueDate = new Date(this.dueDate.year, this.dueDate.month - 1, this.dueDate.day);
     }
     this.todo.notes = this.notes;
+    this.todo.priority = parseInt(editForm.value.priority, 10);
 
     this.activeModal.close();
   }
@@ -49,6 +54,7 @@ export class EditTodoComponent implements OnInit {
   ngOnInit() {
     this.text = this.todo.text;
     this.notes = this.todo.notes;
+    this.priority = this.todo.priority;
 
     if (this.todo.dueDate) {
       this.dueDate = {
@@ -59,6 +65,14 @@ export class EditTodoComponent implements OnInit {
     }
 
     this.textInput.nativeElement.focus();
+  }
+
+  get priorities() {
+    return [
+      { label: 'High', value: Priority.HIGH },
+      { label: 'Normal', value: Priority.NORMAL },
+      { label: 'Low', value: Priority.LOW }
+    ];
   }
 
 }

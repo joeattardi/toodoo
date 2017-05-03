@@ -50,3 +50,15 @@
 .overdue {
   border-left: 5px solid red;
 }
+
+.priority {
+  margin-left: 0.25em;
+}
+
+.priority .fa-arrow-up {
+  color: red;
+}
+
+.priority .fa-arrow-down {
+  color: green;
+}

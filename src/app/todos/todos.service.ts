@@ -1,14 +1,16 @@
 import { TodoList } from './todo-list.model';
 import { Todo } from './todo.model';
+import { Priority } from './priority.enum';
 
 export class TodosService {
   private todoLists = [
     new TodoList('Inbox', [], 'fa-inbox', false),
     new TodoList('Home', []),
     new TodoList('Garden', [
-      new Todo('Put down new mulch', false, new Date(2017, 5, 25)),
+      new Todo('Put down new mulch', false, new Date(2017, 5, 25), 'Some notes', Priority.HIGH),
       new Todo('Pick up branches', true),
-      new Todo('Plant flowers', false, new Date(2017, 3, 10))
+      new Todo('Trim hedges', false, null, '', Priority.NORMAL),
+      new Todo('Plant flowers', false, new Date(2017, 3, 10), 'Pretty flowers', Priority.LOW)
     ]),
     new TodoList('Work', [])
   ];

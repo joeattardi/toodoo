@@ -27,6 +27,12 @@
           </div>
       </div>
       <div class="form-group">
+        <label for="priority">Priority</label>
+        <select class="form-control custom-select" [(ngModel)]="priority" name="priority">
+          <option *ngFor="let priority of priorities" [value]="priority.value">{{priority.label}}</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label for="dueDate">Due date</label>
         <div class="input-group">
           <input

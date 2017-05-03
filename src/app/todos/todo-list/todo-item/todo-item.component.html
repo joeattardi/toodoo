@@ -1,6 +1,16 @@
 <li class="list-group-item todo" [class.completed]="todo.completed" [class.overdue]="todo.isOverdue() && !todo.completed">
   <div class="d-flex flex-row justify-content-between todo-container">
-    <div class="align-self-center"><app-toggle-todo [todo]="todo"></app-toggle-todo></div>
+    <div class="align-self-center d-flex">
+      <app-toggle-todo [todo]="todo"></app-toggle-todo>
+      <div class="priority">
+        <i *ngIf="todo.priority === priorityEnum.HIGH || todo.priority === priorityEnum.LOW"
+          class="fa fa-sm"
+          [ngbTooltip]="priorityTooltip"
+          [class.fa-arrow-up]="todo.priority === priorityEnum.HIGH"
+          [class.fa-arrow-down]="todo.priority === priorityEnum.LOW"
+        ></i>
+      </div>
+    </div>
     <div class="todo-text d-flex flex-column justify-content-center" (dblclick)="editTodo($event)">
       <div>{{ todo.text }}</div>
       <small class="due-date">{{ todo.dueDate | date }}</small>

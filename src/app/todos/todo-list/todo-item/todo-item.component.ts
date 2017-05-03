@@ -5,6 +5,7 @@ import { EditTodoComponent } from '../edit-todo/edit-todo.component';
 import { Todo } from '../../todo.model';
 import { TodoList } from '../../todo-list.model';
 import { Priority } from '../../priority.enum';
+import { DragDropService } from '../../../drag-drop.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -17,10 +18,17 @@ export class TodoItemComponent {
 
   priorityEnum = Priority;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private dndService: DragDropService) { }
 
   toggleTodo() {
     this.todo.completed = !this.todo.completed;
+  }
+
+  onDragStart(event) {
+    this.dndService.currentDraggedItem = event.target;
+    event.dataTransfer.setDragImage(event.target, 0, 0);
+    event.dataTransfer.setData('srcList', this.todoList);
+    event.dataTransfer.setData('todo', this.todo);
   }
 
   editTodo(event) {
@@ -28,7 +36,7 @@ export class TodoItemComponent {
     event.preventDefault();
 
     document.getElementById('add-todo-text').blur();
-    
+
     const modalRef = this.modalService.open(EditTodoComponent);
     modalRef.componentInstance.todo = this.todo;
     modalRef.componentInstance.todoList = this.todoList;

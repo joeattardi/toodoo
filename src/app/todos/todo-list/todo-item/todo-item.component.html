@@ -1,4 +1,10 @@
-<li class="list-group-item todo" [class.completed]="todo.completed" [class.overdue]="todo.isOverdue() && !todo.completed">
+<li
+  class="list-group-item todo"
+  [class.completed]="todo.completed"
+  draggable="true"
+  (dragstart)="onDragStart($event)"
+  [class.overdue]="todo.isOverdue() && !todo.completed"
+>
   <div class="d-flex flex-row justify-content-between todo-container">
     <div class="align-self-center d-flex">
       <app-toggle-todo [todo]="todo"></app-toggle-todo>

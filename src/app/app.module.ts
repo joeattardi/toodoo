@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { TodosService } from './todos/todos.service';
+import { DragDropService } from './drag-drop.service';
 import { HeaderComponent } from './header/header.component';
 import { TodoListsComponent } from './todos/todo-lists/todo-lists.component';
 import { TodoListItemComponent } from './todos/todo-lists/todo-list-item/todo-list-item.component';
@@ -56,7 +57,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot()
   ],
-  providers: [TodosService],
+  providers: [TodosService, DragDropService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

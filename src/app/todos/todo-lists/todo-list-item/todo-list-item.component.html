@@ -3,6 +3,9 @@
   routerLinkActive="active"
   (dblclick)="editList($event)"
   class="list-group-item list-group-item-action justify-content-between todo-list-item"
+  (dragover)="onDragOver($event)"
+  (drop)="onDrop($event)"
+  (dragleave)="onDragLeave($event)"
 >
   <span class="list-label"><i [class]="'fa ' + todoList.icon" aria-hidden="true"></i> {{ todoList.name }}</span>
   <div>

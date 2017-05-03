@@ -33,6 +33,30 @@ export class TodoListComponent implements OnInit {
       this.todoList = this.todosService.getTodoList(params.index);
     });
 
-    dragula([document.getElementById('active-todos')]);
+    // document.addEventListener('dragstart', (event: DragEvent) => {
+    //   (<any>event.dataTransfer).setDragImage(event.target, 0, 0);
+    // });
+    //
+    // document.addEventListener('dragenter', (event: DragEvent) => {
+    //   const target = (<HTMLElement> event.target);
+    //   if (target.classList.contains('todo-list-item')) {
+    //     target.style.background = 'red';
+    //   }
+    // });
+    //
+    // document.addEventListener('dragleave', (event: DragEvent) => {
+    //   const target = (<HTMLElement> event.target);
+    //   if (target.classList.contains('todo-list-item')) {
+    //     target.style.background = '';
+    //   }
+    // });
+    //
+    // document.addEventListener('drop', (event: DragEvent) => {
+    //   const target = (<HTMLElement> event.target);
+    //   console.log(target);
+    //   if (target.classList.contains('todo-list-item')) {
+    //     target.style.background = 'blue';
+    //   }
+    // });
   }
 }

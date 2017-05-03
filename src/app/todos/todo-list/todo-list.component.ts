@@ -30,9 +30,7 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      console.log(params.id);
       this.todoList = this.todosService.getTodoList(params.id);
-      console.log(this.todoList);
     });
 
     // document.addEventListener('dragstart', (event: DragEvent) => {

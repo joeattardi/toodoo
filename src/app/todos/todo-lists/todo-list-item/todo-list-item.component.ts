@@ -12,7 +12,6 @@ import { DragDropService } from '../../../drag-drop.service';
 })
 export class TodoListItemComponent {
   @Input() todoList: TodoList;
-  @Input() index: number;
 
   constructor(private modalService: NgbModal, private dndService: DragDropService) { }
 

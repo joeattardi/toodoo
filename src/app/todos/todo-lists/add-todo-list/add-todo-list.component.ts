@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import shortid from 'shortid';
 
 import { TodosService } from '../../todos.service';
 import { TodoList } from '../../todo-list.model';
@@ -20,7 +21,7 @@ export class AddTodoListComponent implements OnInit {
   }
 
   onAdd(addForm: NgForm) {
-    this.todosService.addTodoList(new TodoList(addForm.value.name, []));
+    this.todosService.addTodoList(new TodoList(shortid.generate(), addForm.value.name, []));
     this.activeModal.close();
   }
 

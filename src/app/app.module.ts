@@ -24,9 +24,9 @@ import { ToggleTodoComponent } from './todos/todo-list/toggle-todo/toggle-todo.c
 const appRoutes: Routes = [
   { path: 'lists', component: TodosComponent, children: [
     { path: '', component: SelectListComponent },
-    { path: ':index', component: TodoListComponent }
+    { path: ':id', component: TodoListComponent }
   ]},
-  { path: '', redirectTo: '/lists/0', pathMatch: 'full' }
+  { path: '', redirectTo: '/lists/inbox', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import shortid from 'shortid';
 
 import { Todo } from '../../todo.model';
 import { TodoList } from '../../todo-list.model';
@@ -14,7 +15,7 @@ export class AddTodoComponent {
 
   addTodo(form: NgForm) {
     if (form.valid) {
-      this.todoList.todos.unshift(new Todo(form.value.text));
+      this.todoList.todos.unshift(new Todo(shortid.generate(), form.value.text));
       form.reset();
     }
   }

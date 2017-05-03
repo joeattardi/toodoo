@@ -3,8 +3,8 @@
   <div class="list-group" id="todo-list-items">
     <app-todo-list-item
       [id]="todoList.name"
-      *ngFor="let todoList of todoLists; let i = index"
-      [todoList]="todoList" [index]="i"
+      *ngFor="let todoList of todoLists"
+      [todoList]="todoList"
     ></app-todo-list-item>
   </div>
 

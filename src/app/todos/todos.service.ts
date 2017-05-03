@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import shortid from 'shortid';
 
 import { TodoList } from './todo-list.model';
@@ -21,8 +22,16 @@ export class TodosService {
     return this.todoLists;
   }
 
+  moveTodo(todoId: string, srcListId: string, destListId: string) {
+    const srcList = this.getTodoList(srcListId);
+    const srcIndex = _.findIndex(srcList.todos, todo => todo.id === todoId);
+    const todo = srcList.todos.splice(srcIndex, 1)[0];
+
+    const destList = this.getTodoList(destListId);
+    destList.todos.unshift(todo);
+  }
+
   getTodoList(id: string) {
-    console.log(this.todoLists);
     return this.todoLists.find(todoList => todoList.id === id);
   }
 

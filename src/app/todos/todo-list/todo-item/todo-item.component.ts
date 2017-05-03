@@ -27,8 +27,8 @@ export class TodoItemComponent {
   onDragStart(event) {
     this.dndService.currentDraggedItem = event.target;
     event.dataTransfer.setDragImage(event.target, 0, 0);
-    event.dataTransfer.setData('srcList', this.todoList);
-    event.dataTransfer.setData('todo', this.todo);
+    event.dataTransfer.setData('srcListId', this.todoList.id);
+    event.dataTransfer.setData('todoId', this.todo.id);
   }
 
   editTodo(event) {

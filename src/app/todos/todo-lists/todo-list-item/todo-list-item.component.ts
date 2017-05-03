@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditTodoListComponent } from '../edit-todo-list/edit-todo-list.component';
 import { TodoList } from '../../todo-list.model';
 import { DragDropService } from '../../../drag-drop.service';
+import { TodosService } from '../../todos.service';
 
 @Component({
   selector: 'app-todo-list-item',
@@ -13,7 +14,9 @@ import { DragDropService } from '../../../drag-drop.service';
 export class TodoListItemComponent {
   @Input() todoList: TodoList;
 
-  constructor(private modalService: NgbModal, private dndService: DragDropService) { }
+  constructor(private modalService: NgbModal,
+    private dndService: DragDropService,
+    private todosService: TodosService) { }
 
   onDragLeave(event) {
     event.target.style.background = '';
@@ -27,9 +30,12 @@ export class TodoListItemComponent {
   }
 
   onDrop(event) {
-    console.log(event.dataTransfer.getData('todo'));
-    console.log(event.dataTransfer.getData('srcList'));
     event.target.style.background = '';
+
+    const todoId = event.dataTransfer.getData('todoId');
+    const srcListId = event.dataTransfer.getData('srcListId');
+
+    this.todosService.moveTodo(todoId, srcListId, this.todoList.id);
   }
 
   get openTodosCount() {

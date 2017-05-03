@@ -6,3 +6,7 @@
   margin-left: 0.25em;
   width: 100%;
 }
+
+#todo-text-error {
+  margin-left: 0.25em;
+}

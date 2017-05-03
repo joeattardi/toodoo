@@ -1,3 +1,11 @@
 .list-group {
   margin-top: 1em;
 }
+
+.todo-list-header {
+  margin-bottom: 0.25rem;
+}
+
+.todo-list-header h3 {
+  flex-grow: 1;
+}

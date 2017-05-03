@@ -7,22 +7,24 @@
       <div *ngIf="isOverdue" class="alert alert-danger" role="alert">
         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> This todo is overdue.
       </div>
-      <div class="form-group d-flex">
-        <div class="align-self-center">
-          <app-toggle-todo [todo]="todo"></app-toggle-todo>
-        </div>
-        <div class="todo-text">
-          <input
-            class="form-control"
-            type="text"
-            name="text"
-            id="text"
-            maxlength="100"
-            [(ngModel)]="text"
-            #textInput
-            required
-          >
-        </div>
+      <div class="form-group d-flex" [class.has-danger]="!textInput.valid && textInput.touched">
+          <div class="align-self-center">
+            <app-toggle-todo [todo]="todo"></app-toggle-todo>
+          </div>
+          <div class="todo-text">
+            <input
+              class="form-control"
+              type="text"
+              name="text"
+              id="text"
+              maxlength="100"
+              [(ngModel)]="text"
+              #textInputEl
+              #textInput="ngModel"
+              required
+            >
+            <div id="todo-text-error" *ngIf="!textInput.valid && textInput.touched" class="form-control-feedback">Todo text is required.</div>
+          </div>
       </div>
       <div class="form-group">
         <label for="dueDate">Due date</label>

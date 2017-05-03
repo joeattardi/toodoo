@@ -1,8 +1,20 @@
 <div>
-  <h3>{{ todoList.name }}</h3>
+  <div class="d-flex align-items-center todo-list-header">
+    <h3>{{ todoList.name }}</h3>
+    <div>
+      <button class="btn btn-primary btn-sm" (click)="toggleShowCompletedTodos()">
+        {{ showCompletedTodos ? 'Hide completed todos' : 'Show completed todos' }}
+      </button>
+    </div>
+  </div>
   <app-add-todo [todoList]="todoList"></app-add-todo>
   <ul class="list-group">
-    <app-todo-item *ngFor="let todo of todoList.todos" [todo]="todo" [todoList]="todoList">
+    <app-todo-item *ngFor="let todo of activeTodos" [todo]="todo" [todoList]="todoList">
+    </app-todo-item>
+  </ul>
+
+  <ul class="list-group" *ngIf="showCompletedTodos">
+    <app-todo-item *ngFor="let todo of completedTodos" [todo]="todo" [todoList]="todoList">
     </app-todo-item>
   </ul>
 </div>

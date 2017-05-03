@@ -4,10 +4,21 @@
   </div>
   <div class="modal-body">
     <div class="container-fluid">
-      <div class="form-group">
+      <div class="form-group" [class.has-danger]="!listName.valid && listName.touched">
         <label for="name">List name</label>
-        <input type="text" class="form-control" id="name" name="name" maxlength="50" #nameInput ngModel required>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          maxlength="50"
+          #nameInputEl
+          #listName="ngModel"
+          ngModel
+          required
+        >
       </div>
+      <div *ngIf="!listName.valid && listName.touched" class="form-control-feedback">List name is required.</div>
     </div>
   </div>
   <div class="modal-footer">

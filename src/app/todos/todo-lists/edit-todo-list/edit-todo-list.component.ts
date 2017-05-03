@@ -12,7 +12,7 @@ import { TodosService } from '../../todos.service';
 })
 export class EditTodoListComponent implements OnInit {
   @Input() todoList: TodoList;
-  @ViewChild('nameInput') nameInput: ElementRef;
+  @ViewChild('nameInputEl') nameInput: ElementRef;
 
   name: string;
 

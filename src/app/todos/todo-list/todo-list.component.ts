@@ -10,9 +10,22 @@ import { TodoList } from '../todo-list.model';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  todoList: TodoList
+  private todoList: TodoList
+  private showCompletedTodos = false;
 
   constructor(private route: ActivatedRoute, private todosService: TodosService) { }
+
+  get activeTodos() {
+    return this.todoList.todos.filter(todo => !todo.completed);
+  }
+
+  get completedTodos() {
+    return this.todoList.todos.filter(todo => todo.completed);
+  }
+
+  toggleShowCompletedTodos() {
+    this.showCompletedTodos = !this.showCompletedTodos;
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {

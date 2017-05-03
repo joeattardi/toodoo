@@ -11,7 +11,7 @@ import { TodoList } from '../../todo-list.model';
   styleUrls: ['./add-todo-list.component.css']
 })
 export class AddTodoListComponent implements OnInit {
-  @ViewChild('nameInput') nameInput: ElementRef;
+  @ViewChild('nameInputEl') nameInput: ElementRef;
 
   constructor(private activeModal: NgbActiveModal, private todosService: TodosService) { }
 

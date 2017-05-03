@@ -14,7 +14,7 @@ import { Todo } from '../../todo.model';
 export class EditTodoComponent implements OnInit {
   @Input() todo: Todo;
   @Input() todoList: TodoList;
-  @ViewChild('textInput') textInput: ElementRef;
+  @ViewChild('textInputEl') textInput: ElementRef;
 
   text: string;
   dueDate: { year: number, month: number, day: number };

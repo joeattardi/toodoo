@@ -5,3 +5,7 @@ body {
 button {
   cursor: pointer;
 }
+
+.has-danger .toggle-completed-container i {
+  margin-bottom: 1.5em;
+}

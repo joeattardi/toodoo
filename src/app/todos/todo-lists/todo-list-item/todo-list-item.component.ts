@@ -18,19 +18,19 @@ export class TodoListItemComponent {
     private dndService: DragDropService,
     private todosService: TodosService) { }
 
-  onDragLeave(event) {
-    event.target.style.background = '';
+  onDragLeave(event: DragEvent) {
+    (<HTMLElement>event.target).style.background = '';
   }
 
-  onDragOver(event) {
+  onDragOver(event: DragEvent) {
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
-      event.target.style.background = 'red';
+      (<HTMLElement>event.target).style.background = 'red';
     }
     return false;
   }
 
-  onDrop(event) {
-    event.target.style.background = '';
+  onDrop(event: DragEvent) {
+    (<HTMLElement>event.target).style.background = '';
 
     const todoId = event.dataTransfer.getData('todoId');
     const srcListId = event.dataTransfer.getData('srcListId');
@@ -42,7 +42,7 @@ export class TodoListItemComponent {
     return this.todoList.todos.filter(todo => !todo.completed).length;
   }
 
-  editList(event) {
+  editList(event: MouseEvent) {
     if (!this.todoList.editable) {
       return;
     }

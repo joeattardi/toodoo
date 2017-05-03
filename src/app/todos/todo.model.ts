@@ -9,7 +9,8 @@ export class Todo {
   notes: string;
   priority: Priority;
 
-  constructor(id: string, text: string, completed = false, dueDate?: Date, notes?: string, priority?: Priority) {
+  constructor(id: string, text: string, completed = false, dueDate?: Date,
+      notes?: string, priority: Priority = Priority.NORMAL) {
     this.id = id;
     this.text = text;
     this.completed = completed;

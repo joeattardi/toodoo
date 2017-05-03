@@ -18,24 +18,44 @@ export class TodoListItemComponent {
     private dndService: DragDropService,
     private todosService: TodosService) { }
 
+  onDragStart(event: DragEvent) {
+    this.dndService.currentDraggedItem = <Element> event.target;
+    event.dataTransfer.setData('srcListId', this.todoList.id);
+    event.dataTransfer.effectAllowed = 'move';
+  }
+
   onDragLeave(event: DragEvent) {
     (<HTMLElement>event.target).style.background = '';
   }
 
   onDragOver(event: DragEvent) {
+    event.preventDefault();
+
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
       (<HTMLElement>event.target).style.background = 'red';
+    } else {
+      event.dataTransfer.dropEffect = 'move';
     }
-    return false;
   }
 
   onDrop(event: DragEvent) {
-    (<HTMLElement>event.target).style.background = '';
 
-    const todoId = event.dataTransfer.getData('todoId');
-    const srcListId = event.dataTransfer.getData('srcListId');
+    if (this.dndService.currentDraggedItem.classList.contains('todo')) {
+      (<HTMLElement>event.target).style.background = '';
 
-    this.todosService.moveTodo(todoId, srcListId, this.todoList.id);
+      const todoId = event.dataTransfer.getData('todoId');
+      const srcListId = event.dataTransfer.getData('srcListId');
+
+      this.todosService.moveTodo(todoId, srcListId, this.todoList.id);
+    } else {
+      console.log(this.todosService.indexOfList(this.todoList));
+
+      const destIndex = this.todosService.indexOfList(this.todoList);
+      if (destIndex > 0) {
+        const listToMove = this.todosService.getTodoList(event.dataTransfer.getData('srcListId'));
+        this.todosService.moveList(listToMove, destIndex);
+      }
+    }
   }
 
   get openTodosCount() {

@@ -31,7 +31,7 @@ export class TodosService {
     destList.todos.unshift(todo);
   }
 
-  getTodoList(id: string) {
+  getTodoList(id: string): TodoList {
     return this.todoLists.find(todoList => todoList.id === id);
   }
 
@@ -41,5 +41,14 @@ export class TodosService {
 
   deleteTodoList(list: TodoList) {
     this.todoLists = this.todoLists.filter(l => l !== list);
+  }
+
+  indexOfList(list: TodoList): number {
+    return this.todoLists.indexOf(list);
+  }
+
+  moveList(list: TodoList, destIndex: number) {
+    this.todoLists.splice(this.todoLists.indexOf(list), 1);
+    this.todoLists.splice(destIndex, 0, list);
   }
 }

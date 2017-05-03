@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import dragula from 'dragula';
 
 import { TodoList } from '../todo-list.model';
 import { TodosService } from '../todos.service';
@@ -11,7 +10,7 @@ import { AddTodoListComponent } from './add-todo-list/add-todo-list.component';
   templateUrl: './todo-lists.component.html',
   styleUrls: ['./todo-lists.component.css']
 })
-export class TodoListsComponent implements OnInit {
+export class TodoListsComponent {
   constructor(private todosService: TodosService, private modalService: NgbModal) { }
 
   onAddClicked() {
@@ -20,17 +19,5 @@ export class TodoListsComponent implements OnInit {
 
   get todoLists() {
     return this.todosService.getTodoLists();
-  }
-
-  ngOnInit() {
-    dragula([document.getElementById('todo-list-items')], {
-      moves(el, source, handle, sibling) {
-        return el.id !== 'Inbox';
-      },
-
-      accepts(el, target, source, sibling) {
-        return sibling === null || sibling.id !== 'Inbox';
-      }
-    });
   }
 }

@@ -3,6 +3,8 @@
   routerLinkActive="active"
   (dblclick)="editList($event)"
   class="list-group-item list-group-item-action justify-content-between todo-list-item"
+  draggable="true"
+  (dragstart)="onDragStart($event)"
   (dragover)="onDragOver($event)"
   (drop)="onDrop($event)"
   (dragleave)="onDragLeave($event)"

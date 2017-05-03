@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import dragula from 'dragula';
 
 import { TodosService } from '../todos.service';
 import { TodoList } from '../todo-list.model';
@@ -31,6 +32,7 @@ export class TodoListComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.todoList = this.todosService.getTodoList(params.index);
     });
-  }
 
+    dragula([document.getElementById('active-todos')]);
+  }
 }

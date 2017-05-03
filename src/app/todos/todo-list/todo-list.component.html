@@ -8,7 +8,7 @@
     </div>
   </div>
   <app-add-todo [todoList]="todoList"></app-add-todo>
-  <ul class="list-group">
+  <ul class="list-group" id="active-todos">
     <app-todo-item *ngFor="let todo of activeTodos" [todo]="todo" [todoList]="todoList">
     </app-todo-item>
   </ul>

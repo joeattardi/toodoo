@@ -11,7 +11,7 @@
   <div>
     <span *ngIf="openTodosCount > 0" class="badge badge-default badge-pill">{{ openTodosCount }}</span>
     <i
-      *ngIf="todoList.editable"
+      [class.uneditable]="!todoList.editable"
       (click)="editList($event)"
       class="fa fa-pencil"
       aria-hidden="true"

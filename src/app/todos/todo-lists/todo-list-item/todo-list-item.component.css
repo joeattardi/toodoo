@@ -33,3 +33,11 @@ a:hover .fa-pencil:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.active-drop-target {
+  background-color: #F4FAFF;
+}
+
+.active-drop-target.active {
+  background-color: #3D698E;
+}

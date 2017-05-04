@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { EditTodoListComponent } from '../edit-todo-list/edit-todo-list.component';
@@ -13,43 +13,47 @@ import { TodosService } from '../../todos.service';
 })
 export class TodoListItemComponent {
   @Input() todoList: TodoList;
+  @ViewChild('dropTarget') dropTarget;
 
   constructor(private modalService: NgbModal,
     private dndService: DragDropService,
     private todosService: TodosService) { }
 
   onDragStart(event: DragEvent) {
-    this.dndService.currentDraggedItem = <Element> event.target;
-    event.dataTransfer.setData('srcListId', this.todoList.id);
-    event.dataTransfer.effectAllowed = 'move';
+    if (this.todoList.id !== 'inbox') {
+      this.dndService.currentDraggedItem = <Element> event.target;
+      event.dataTransfer.setData('srcListId', this.todoList.id);
+      event.dataTransfer.effectAllowed = 'move';
+      (<any>event.dataTransfer).setDragImage(event.target, 0, 0);
+    }
   }
 
   onDragLeave(event: DragEvent) {
-    (<HTMLElement>event.target).style.background = '';
+    if (this.dndService.currentDraggedItem.classList.contains('todo')) {
+      this.dropTarget.nativeElement.classList.remove('active-drop-target');
+    }
   }
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
+    const targetElement = <any>event.target;
 
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
-      (<HTMLElement>event.target).style.background = 'red';
+      this.dropTarget.nativeElement.classList.add('active-drop-target');
     } else {
-      event.dataTransfer.dropEffect = 'move';
     }
   }
 
   onDrop(event: DragEvent) {
 
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
-      (<HTMLElement>event.target).style.background = '';
+      this.dropTarget.nativeElement.classList.remove('active-drop-target');
 
       const todoId = event.dataTransfer.getData('todoId');
       const srcListId = event.dataTransfer.getData('srcListId');
 
       this.todosService.moveTodo(todoId, srcListId, this.todoList.id);
     } else {
-      console.log(this.todosService.indexOfList(this.todoList));
-
       const destIndex = this.todosService.indexOfList(this.todoList);
       if (destIndex > 0) {
         const listToMove = this.todosService.getTodoList(event.dataTransfer.getData('srcListId'));

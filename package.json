@@ -24,6 +24,7 @@
     "bootstrap": "^4.0.0-alpha.6",
     "core-js": "^2.4.1",
     "dragula": "^3.7.2",
+    "element-client-rect": "^1.0.4",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

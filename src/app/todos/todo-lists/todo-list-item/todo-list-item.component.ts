@@ -1,5 +1,6 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import getElementClientRect from 'element-client-rect';
 
 import { EditTodoListComponent } from '../edit-todo-list/edit-todo-list.component';
 import { TodoList } from '../../todo-list.model';
@@ -11,13 +12,20 @@ import { TodosService } from '../../todos.service';
   templateUrl: './todo-list-item.component.html',
   styleUrls: ['./todo-list-item.component.css']
 })
-export class TodoListItemComponent {
+export class TodoListItemComponent implements OnInit {
   @Input() todoList: TodoList;
   @ViewChild('dropTarget') dropTarget;
+
+  private moveMarker: HTMLElement;
 
   constructor(private modalService: NgbModal,
     private dndService: DragDropService,
     private todosService: TodosService) { }
+
+  ngOnInit() {
+    this.moveMarker = document.createElement('div');
+    this.moveMarker.className = 'move-marker';
+  }
 
   onDragStart(event: DragEvent) {
     if (this.todoList.id !== 'inbox') {
@@ -28,19 +36,43 @@ export class TodoListItemComponent {
     }
   }
 
+  onDragEnd(event: DragEvent) {
+    if (this.moveMarker.parentNode) {
+      this.moveMarker.parentNode.removeChild(this.moveMarker);
+    }
+  }
+
   onDragLeave(event: DragEvent) {
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
       this.dropTarget.nativeElement.classList.remove('active-drop-target');
+    } else {
+      if (this.moveMarker.parentNode) {
+        this.moveMarker.parentNode.removeChild(this.moveMarker);
+      }
     }
   }
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
-    const targetElement = <any>event.target;
+    const targetElement = <HTMLElement>event.target;
 
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
       this.dropTarget.nativeElement.classList.add('active-drop-target');
     } else {
+      const rect = getElementClientRect(targetElement);
+      const top = rect.top;
+      const bottom = rect.top + rect.height;
+      const midpoint = (bottom - top) / 2;
+      const relativeY = event.clientY - rect.top;
+
+      const parent = this.dropTarget.nativeElement.parentNode;
+      if (targetElement.id !== 'list-inbox') {
+        if (relativeY <= midpoint) {
+          parent.insertBefore(this.moveMarker, this.dropTarget.nativeElement);
+        } else {
+          parent.insertBefore(this.moveMarker, this.dropTarget.nativeElement.nextSibling);
+        }
+      }
     }
   }
 
@@ -53,6 +85,9 @@ export class TodoListItemComponent {
 
       this.todosService.moveTodo(todoId, srcListId, this.todoList.id);
     } else {
+      if (this.moveMarker.parentNode) {
+        this.moveMarker.parentNode.removeChild(this.moveMarker);
+      }
       const destIndex = this.todosService.indexOfList(this.todoList);
       if (destIndex > 0) {
         const listToMove = this.todosService.getTodoList(event.dataTransfer.getData('srcListId'));

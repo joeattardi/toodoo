@@ -6,9 +6,11 @@
   #dropTarget
   [draggable]="todoList.id !== 'inbox'"
   (dragstart)="onDragStart($event)"
+  (dragend)="onDragEnd($event)"
   (dragover)="onDragOver($event)"
   (drop)="onDrop($event)"
   (dragleave)="onDragLeave($event)"
+  [id]="'list-' + todoList.id"
 >
   <span class="list-label"><i [class]="'fa ' + todoList.icon" aria-hidden="true"></i> {{ todoList.name }}</span>
   <div>

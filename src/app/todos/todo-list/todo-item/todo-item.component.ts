@@ -31,6 +31,25 @@ export class TodoItemComponent {
     event.dataTransfer.setData('todoId', this.todo.id);
   }
 
+  onDragOver(event: DragEvent) {
+    if (this.dndService.currentDraggedItem.classList.contains('todo') && !this.todo.completed) {
+      event.preventDefault();
+    }
+  }
+
+  onDrop(event: DragEvent) {
+    const todoId = event.dataTransfer.getData('todoId');
+    const todo = this.todoList.todos.find(todo => todo.id === todoId);
+
+    if (!todo.completed && !this.todo.completed) {
+      const destIndex = this.todoList.getActiveTodos().indexOf(this.todo);
+      const srcIndex = this.todoList.todos.indexOf(todo);
+
+      this.todoList.todos.splice(srcIndex, 1);
+      this.todoList.todos.splice(destIndex, 0, todo);
+    }
+  }
+
   editTodo(event: MouseEvent) {
     event.stopPropagation();
     event.preventDefault();

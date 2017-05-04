@@ -16,14 +16,6 @@ export class TodoListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private todosService: TodosService) { }
 
-  get activeTodos() {
-    return this.todoList.todos.filter(todo => !todo.completed);
-  }
-
-  get completedTodos() {
-    return this.todoList.todos.filter(todo => todo.completed);
-  }
-
   toggleShowCompletedTodos() {
     this.showCompletedTodos = !this.showCompletedTodos;
   }

@@ -9,12 +9,12 @@
   </div>
   <app-add-todo [todoList]="todoList"></app-add-todo>
   <ul class="list-group" id="active-todos">
-    <app-todo-item *ngFor="let todo of activeTodos" [todo]="todo" [todoList]="todoList">
+    <app-todo-item *ngFor="let todo of todoList.getActiveTodos()" [todo]="todo" [todoList]="todoList">
     </app-todo-item>
   </ul>
 
   <ul class="list-group" *ngIf="showCompletedTodos">
-    <app-todo-item *ngFor="let todo of completedTodos" [todo]="todo" [todoList]="todoList">
+    <app-todo-item *ngFor="let todo of todoList.getCompletedTodos()" [todo]="todo" [todoList]="todoList">
     </app-todo-item>
   </ul>
 </div>

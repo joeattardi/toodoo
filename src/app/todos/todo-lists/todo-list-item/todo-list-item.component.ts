@@ -45,7 +45,6 @@ export class TodoListItemComponent {
   }
 
   onDrop(event: DragEvent) {
-
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
       this.dropTarget.nativeElement.classList.remove('active-drop-target');
 

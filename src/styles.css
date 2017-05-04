@@ -19,6 +19,12 @@ button {
   width: 100%;
 }
 
+.move-marker i {
+  position: absolute;
+  top: -0.5em;
+  color: red;
+}
+
 .sk-fading-circle {
   margin: 100px auto;
   width: 40px;

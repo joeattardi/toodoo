@@ -1,27 +1,42 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { EditTodoComponent } from '../edit-todo/edit-todo.component';
 import { Todo } from '../../todo.model';
 import { TodoList } from '../../todo-list.model';
 import { Priority } from '../../priority.enum';
-import { DragDropService } from '../../../drag-drop.service';
+import { DragDropService, Region } from '../../../drag-drop.service';
 
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.css']
 })
-export class TodoItemComponent {
+export class TodoItemComponent implements OnInit {
   @Input() todo: Todo;
   @Input() todoList: TodoList;
+
+  @ViewChild('dropTarget') dropTarget;
+
+  private moveMarker: HTMLElement;
 
   priorityEnum = Priority;
 
   constructor(private modalService: NgbModal, private dndService: DragDropService) { }
 
+  ngOnInit() {
+    this.moveMarker = document.createElement('div');
+    this.moveMarker.className = 'move-marker';
+  }
+
   toggleTodo() {
     this.todo.completed = !this.todo.completed;
+  }
+
+  removeMarker() {
+    if (this.moveMarker.parentNode) {
+      this.moveMarker.parentNode.removeChild(this.moveMarker);
+    }
   }
 
   onDragStart(event: DragEvent) {
@@ -31,22 +46,40 @@ export class TodoItemComponent {
     event.dataTransfer.setData('todoId', this.todo.id);
   }
 
+  onDragEnd(event: DragEvent) {
+    this.removeMarker();
+  }
+
+  onDragLeave(event: DragEvent) {
+    this.removeMarker();
+  }
+
   onDragOver(event: DragEvent) {
     if (this.dndService.currentDraggedItem.classList.contains('todo') && !this.todo.completed) {
       event.preventDefault();
+
+      const parent = this.dropTarget.nativeElement.parentNode;
+      const region = this.dndService.getRegion(event);
+      if (region === Region.TOP) {
+        parent.insertBefore(this.moveMarker, this.dropTarget.nativeElement);
+      } else {
+        parent.insertBefore(this.moveMarker, this.dropTarget.nativeElement.nextSibling);
+      }
     }
   }
 
   onDrop(event: DragEvent) {
     const todoId = event.dataTransfer.getData('todoId');
     const todo = this.todoList.todos.find(todo => todo.id === todoId);
+    const srcIndex = this.todoList.todos.indexOf(todo);
+    const destIndex = this.todoList.getActiveTodos().indexOf(this.todo);
 
     if (!todo.completed && !this.todo.completed) {
-      const destIndex = this.todoList.getActiveTodos().indexOf(this.todo);
-      const srcIndex = this.todoList.todos.indexOf(todo);
-
-      this.todoList.todos.splice(srcIndex, 1);
-      this.todoList.todos.splice(destIndex, 0, todo);
+      this.removeMarker();
+      this.dndService.handleDropLogic(srcIndex, destIndex, event, insertionIndex => {
+        this.todoList.todos.splice(srcIndex, 1);
+        this.todoList.todos.splice(insertionIndex, 0, todo);
+      });
     }
   }
 

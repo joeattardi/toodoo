@@ -1,10 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import getElementClientRect from 'element-client-rect';
 
 import { EditTodoListComponent } from '../edit-todo-list/edit-todo-list.component';
 import { TodoList } from '../../todo-list.model';
-import { DragDropService } from '../../../drag-drop.service';
+import { DragDropService, Region } from '../../../drag-drop.service';
 import { TodosService } from '../../todos.service';
 
 @Component({
@@ -25,6 +24,7 @@ export class TodoListItemComponent implements OnInit {
   ngOnInit() {
     this.moveMarker = document.createElement('div');
     this.moveMarker.className = 'move-marker';
+    this.moveMarker.innerHTML = '<i class="fa fs-lg fa-arrow-right"></i>';
   }
 
   onDragStart(event: DragEvent) {
@@ -36,19 +36,21 @@ export class TodoListItemComponent implements OnInit {
     }
   }
 
-  onDragEnd(event: DragEvent) {
+  removeMarker() {
     if (this.moveMarker.parentNode) {
       this.moveMarker.parentNode.removeChild(this.moveMarker);
     }
+  }
+
+  onDragEnd(event: DragEvent) {
+    this.removeMarker();
   }
 
   onDragLeave(event: DragEvent) {
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
       this.dropTarget.nativeElement.classList.remove('active-drop-target');
     } else {
-      if (this.moveMarker.parentNode) {
-        this.moveMarker.parentNode.removeChild(this.moveMarker);
-      }
+      this.removeMarker();
     }
   }
 
@@ -59,15 +61,13 @@ export class TodoListItemComponent implements OnInit {
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
       this.dropTarget.nativeElement.classList.add('active-drop-target');
     } else {
-      const rect = getElementClientRect(targetElement);
-      const top = rect.top;
-      const bottom = rect.top + rect.height;
-      const midpoint = (bottom - top) / 2;
-      const relativeY = event.clientY - rect.top;
-
+      const region = this.dndService.getRegion(event);
       const parent = this.dropTarget.nativeElement.parentNode;
+
+      const destIndex = this.todosService.indexOfList(this.todoList);
+
       if (targetElement.id !== 'list-inbox') {
-        if (relativeY <= midpoint) {
+        if (region === Region.TOP) {
           parent.insertBefore(this.moveMarker, this.dropTarget.nativeElement);
         } else {
           parent.insertBefore(this.moveMarker, this.dropTarget.nativeElement.nextSibling);
@@ -77,22 +77,24 @@ export class TodoListItemComponent implements OnInit {
   }
 
   onDrop(event: DragEvent) {
+    const srcListId = event.dataTransfer.getData('srcListId');
+
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
       this.dropTarget.nativeElement.classList.remove('active-drop-target');
-
       const todoId = event.dataTransfer.getData('todoId');
-      const srcListId = event.dataTransfer.getData('srcListId');
-
       this.todosService.moveTodo(todoId, srcListId, this.todoList.id);
     } else {
-      if (this.moveMarker.parentNode) {
-        this.moveMarker.parentNode.removeChild(this.moveMarker);
-      }
+      this.removeMarker();
+      const region = this.dndService.getRegion(event);
+      const srcIndex = this.todosService.indexOfList(this.todosService.getTodoList(srcListId));
       const destIndex = this.todosService.indexOfList(this.todoList);
-      if (destIndex > 0) {
-        const listToMove = this.todosService.getTodoList(event.dataTransfer.getData('srcListId'));
-        this.todosService.moveList(listToMove, destIndex);
-      }
+
+      this.dndService.handleDropLogic(srcIndex, destIndex, event, insertionIndex => {
+        if (insertionIndex > 0) {
+          const listToMove = this.todosService.getTodoList(event.dataTransfer.getData('srcListId'));
+          this.todosService.moveList(listToMove, insertionIndex);
+        }
+      });
     }
   }
 

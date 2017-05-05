@@ -6,8 +6,6 @@
   (dragstart)="onDragStart($event)"
   (drop)="onDrop($event)"
   (dragover)="onDragOver($event)"
-  (dragleave)="onDragLeave($event)"
-  (dragend)="onDragEnd($event)"
   [class.overdue]="todo.isOverdue() && !todo.completed"
 >
   <div class="d-flex flex-row justify-content-between todo-container">

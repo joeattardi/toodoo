@@ -36,21 +36,9 @@ export class TodoListItemComponent implements OnInit {
     }
   }
 
-  removeMarker() {
-    if (this.moveMarker.parentNode) {
-      this.moveMarker.parentNode.removeChild(this.moveMarker);
-    }
-  }
-
-  onDragEnd(event: DragEvent) {
-    this.removeMarker();
-  }
-
   onDragLeave(event: DragEvent) {
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
       this.dropTarget.nativeElement.classList.remove('active-drop-target');
-    } else {
-      this.removeMarker();
     }
   }
 
@@ -60,19 +48,6 @@ export class TodoListItemComponent implements OnInit {
 
     if (this.dndService.currentDraggedItem.classList.contains('todo')) {
       this.dropTarget.nativeElement.classList.add('active-drop-target');
-    } else {
-      const region = this.dndService.getRegion(event);
-      const parent = this.dropTarget.nativeElement.parentNode;
-
-      const destIndex = this.todosService.indexOfList(this.todoList);
-
-      if (targetElement.id !== 'list-inbox') {
-        if (region === Region.TOP) {
-          parent.insertBefore(this.moveMarker, this.dropTarget.nativeElement);
-        } else {
-          parent.insertBefore(this.moveMarker, this.dropTarget.nativeElement.nextSibling);
-        }
-      }
     }
   }
 
@@ -84,17 +59,12 @@ export class TodoListItemComponent implements OnInit {
       const todoId = event.dataTransfer.getData('todoId');
       this.todosService.moveTodo(todoId, srcListId, this.todoList.id);
     } else {
-      this.removeMarker();
-      const region = this.dndService.getRegion(event);
-      const srcIndex = this.todosService.indexOfList(this.todosService.getTodoList(srcListId));
       const destIndex = this.todosService.indexOfList(this.todoList);
 
-      this.dndService.handleDropLogic(srcIndex, destIndex, event, insertionIndex => {
-        if (insertionIndex > 0) {
-          const listToMove = this.todosService.getTodoList(event.dataTransfer.getData('srcListId'));
-          this.todosService.moveList(listToMove, insertionIndex);
-        }
-      });
+      if (destIndex > 0) {
+        const listToMove = this.todosService.getTodoList(event.dataTransfer.getData('srcListId'));
+        this.todosService.moveList(listToMove, destIndex);
+      }
     }
   }
 

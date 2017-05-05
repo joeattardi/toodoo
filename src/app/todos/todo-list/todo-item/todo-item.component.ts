@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { EditTodoComponent } from '../edit-todo/edit-todo.component';
@@ -12,31 +12,18 @@ import { DragDropService, Region } from '../../../drag-drop.service';
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.css']
 })
-export class TodoItemComponent implements OnInit {
+export class TodoItemComponent {
   @Input() todo: Todo;
   @Input() todoList: TodoList;
 
   @ViewChild('dropTarget') dropTarget;
 
-  private moveMarker: HTMLElement;
-
   priorityEnum = Priority;
 
   constructor(private modalService: NgbModal, private dndService: DragDropService) { }
 
-  ngOnInit() {
-    this.moveMarker = document.createElement('div');
-    this.moveMarker.className = 'move-marker';
-  }
-
   toggleTodo() {
     this.todo.completed = !this.todo.completed;
-  }
-
-  removeMarker() {
-    if (this.moveMarker.parentNode) {
-      this.moveMarker.parentNode.removeChild(this.moveMarker);
-    }
   }
 
   onDragStart(event: DragEvent) {
@@ -46,25 +33,9 @@ export class TodoItemComponent implements OnInit {
     event.dataTransfer.setData('todoId', this.todo.id);
   }
 
-  onDragEnd(event: DragEvent) {
-    this.removeMarker();
-  }
-
-  onDragLeave(event: DragEvent) {
-    this.removeMarker();
-  }
-
   onDragOver(event: DragEvent) {
     if (this.dndService.currentDraggedItem.classList.contains('todo') && !this.todo.completed) {
       event.preventDefault();
-
-      const parent = this.dropTarget.nativeElement.parentNode;
-      const region = this.dndService.getRegion(event);
-      if (region === Region.TOP) {
-        parent.insertBefore(this.moveMarker, this.dropTarget.nativeElement);
-      } else {
-        parent.insertBefore(this.moveMarker, this.dropTarget.nativeElement.nextSibling);
-      }
     }
   }
 
@@ -75,11 +46,8 @@ export class TodoItemComponent implements OnInit {
     const destIndex = this.todoList.getActiveTodos().indexOf(this.todo);
 
     if (!todo.completed && !this.todo.completed) {
-      this.removeMarker();
-      this.dndService.handleDropLogic(srcIndex, destIndex, event, insertionIndex => {
-        this.todoList.todos.splice(srcIndex, 1);
-        this.todoList.todos.splice(insertionIndex, 0, todo);
-      });
+      this.todoList.todos.splice(srcIndex, 1);
+      this.todoList.todos.splice(destIndex, 0, todo);
     }
   }
 

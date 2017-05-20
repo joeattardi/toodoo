@@ -66,6 +66,8 @@ export class TodoListItemComponent implements OnInit {
         this.todosService.moveList(listToMove, destIndex);
       }
     }
+
+    this.todosService.saveTodos();
   }
 
   get openTodosCount() {

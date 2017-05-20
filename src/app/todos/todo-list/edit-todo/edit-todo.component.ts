@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import * as moment from 'moment';
 
+import { TodosService } from '../../todos.service';
 import { TodoList } from '../../todo-list.model';
 import { Todo } from '../../todo.model';
 import { Priority } from '../../priority.enum';
@@ -24,7 +25,7 @@ export class EditTodoComponent implements OnInit {
   dueDate: { year: number, month: number, day: number };
   notes: string;
 
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(private activeModal: NgbActiveModal, private todosService: TodosService) { }
 
   onCancel() {
     this.activeModal.close();
@@ -38,11 +39,13 @@ export class EditTodoComponent implements OnInit {
     this.todo.notes = this.notes;
     this.todo.priority = parseInt(editForm.value.priority, 10);
 
+    this.todosService.saveTodos();
     this.activeModal.close();
   }
 
   onDelete() {
     this.todoList.todos = this.todoList.todos.filter(todo => todo !== this.todo);
+    this.todosService.saveTodos();
     this.activeModal.close();
   }
 

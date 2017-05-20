@@ -4,6 +4,7 @@ import shortid from 'shortid';
 
 import { Todo } from '../../todo.model';
 import { TodoList } from '../../todo-list.model';
+import { TodosService } from '../../todos.service';
 
 @Component({
   selector: 'app-add-todo',
@@ -13,9 +14,12 @@ import { TodoList } from '../../todo-list.model';
 export class AddTodoComponent {
   @Input() todoList: TodoList;
 
+  constructor(private todosService: TodosService) { }
+
   addTodo(form: NgForm) {
     if (form.valid) {
       this.todoList.todos.unshift(new Todo(shortid.generate(), form.value.text));
+      this.todosService.saveTodos();
       form.reset();
     }
   }

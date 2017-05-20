@@ -1,22 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Todo } from '../../todo.model';
+import { TodosService } from '../../todos.service';
 
 @Component({
   selector: 'app-toggle-todo',
   templateUrl: './toggle-todo.component.html',
   styleUrls: ['./toggle-todo.component.css']
 })
-export class ToggleTodoComponent implements OnInit {
+export class ToggleTodoComponent {
   @Input() todo: Todo;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  constructor(private todosService: TodosService) { }
 
   toggleTodo() {
     this.todo.completed = !this.todo.completed;
+    this.todosService.saveTodos();
   }
 
 }

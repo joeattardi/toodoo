@@ -28,6 +28,7 @@ export class EditTodoListComponent implements OnInit {
 
   onEdit(editForm: NgForm) {
     this.todoList.name = editForm.value.name;
+    this.todosService.saveTodos();
     this.activeModal.close();
   }
 
@@ -36,6 +37,7 @@ export class EditTodoListComponent implements OnInit {
     const previousList = this.todosService.getTodoLists()[index - 1];
 
     this.todosService.deleteTodoList(this.todoList);
+    this.todosService.saveTodos();
     this.activeModal.close();
     this.router.navigate(['/lists', previousList.id]);
   }

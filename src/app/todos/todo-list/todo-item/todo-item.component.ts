@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { TodosService } from '../../todos.service';
 import { EditTodoComponent } from '../edit-todo/edit-todo.component';
 import { Todo } from '../../todo.model';
 import { TodoList } from '../../todo-list.model';
@@ -20,7 +21,9 @@ export class TodoItemComponent {
 
   priorityEnum = Priority;
 
-  constructor(private modalService: NgbModal, private dndService: DragDropService) { }
+  constructor(private modalService: NgbModal,
+    private dndService: DragDropService,
+    private todosService: TodosService) { }
 
   toggleTodo() {
     this.todo.completed = !this.todo.completed;
@@ -48,6 +51,7 @@ export class TodoItemComponent {
     if (!todo.completed && !this.todo.completed) {
       this.todoList.todos.splice(srcIndex, 1);
       this.todoList.todos.splice(destIndex, 0, todo);
+      this.todosService.saveTodos();
     }
   }
 

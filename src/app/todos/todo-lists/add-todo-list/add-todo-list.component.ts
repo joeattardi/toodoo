@@ -22,6 +22,7 @@ export class AddTodoListComponent implements OnInit {
 
   onAdd(addForm: NgForm) {
     this.todosService.addTodoList(new TodoList(shortid.generate(), addForm.value.name, []));
+    this.todosService.saveTodos();
     this.activeModal.close();
   }
 

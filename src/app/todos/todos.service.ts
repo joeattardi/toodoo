@@ -6,20 +6,33 @@ import { Todo } from './todo.model';
 import { Priority } from './priority.enum';
 
 export class TodosService {
-  private todoLists = [
-    new TodoList('inbox', 'Inbox', [], 'fa-inbox', false),
-    new TodoList(shortid.generate(), 'Home', []),
-    new TodoList(shortid.generate(), 'Garden', [
-      new Todo(shortid.generate(), 'Put down new mulch', false, new Date(2017, 5, 25), 'Some notes', Priority.HIGH),
-      new Todo(shortid.generate(), 'Pick up branches', true),
-      new Todo(shortid.generate(), 'Trim hedges', false, null, '', Priority.NORMAL),
-      new Todo(shortid.generate(), 'Plant flowers', false, new Date(2017, 3, 10), 'Pretty flowers', Priority.LOW)
-    ]),
-    new TodoList(shortid.generate(), 'Work', [])
-  ];
+  private todoLists: TodoList[] = [];
 
   getTodoLists() {
     return this.todoLists;
+  }
+
+  loadTodos() {
+    const storedValue = localStorage.getItem('toodoo');
+    if (storedValue) {
+      const todoData = JSON.parse(storedValue);
+      this.todoLists = todoData.map(listData => {
+        const todosArray = listData.todos ? listData.todos.map(todoData => {
+          return new Todo(todoData.id, todoData.text, todoData.completed,
+            todoData.dueDate, todoData.notes, todoData.priority);
+        }) : [];
+        return new TodoList(listData.id, listData.name, todosArray, listData.icon, listData.editable);
+      });
+    } else {
+      this.todoLists = [
+        new TodoList('inbox', 'Inbox', [], 'fa-inbox', false)
+      ];
+      this.saveTodos();
+    }
+  }
+
+  saveTodos() {
+    localStorage.setItem('toodoo', JSON.stringify(this.todoLists));
   }
 
   moveTodo(todoId: string, srcListId: string, destListId: string) {

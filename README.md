@@ -1,6 +1,9 @@
 # Toodoo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
+A simple todo list application built with Angular 4.
+
+## Demo
+[https://ng-toodoo.firebaseapp.com/](https://ng-toodoo.firebaseapp.com/).
 
 ## Development server
 

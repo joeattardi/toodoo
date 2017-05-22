@@ -44,7 +44,7 @@ export class TodoItemComponent {
 
   onDrop(event: DragEvent) {
     const todoId = event.dataTransfer.getData('todoId');
-    const todo = this.todoList.todos.find(todo => todo.id === todoId);
+    const todo = this.todoList.todos.find(t => t.id === todoId);
     const srcIndex = this.todoList.todos.indexOf(todo);
     const destIndex = this.todoList.getActiveTodos().indexOf(this.todo);
 

@@ -15,11 +15,16 @@ export class TodosService {
   loadTodos() {
     const storedValue = localStorage.getItem('toodoo');
     if (storedValue) {
-      const todoData = JSON.parse(storedValue);
-      this.todoLists = todoData.map(listData => {
+      const rawTodoData = JSON.parse(storedValue);
+      this.todoLists = rawTodoData.map(listData => {
         const todosArray = listData.todos ? listData.todos.map(todoData => {
+          let dueDate;
+          if (todoData.dueDate) {
+            dueDate = new Date(todoData.dueDate);
+          }
+
           return new Todo(todoData.id, todoData.text, todoData.completed,
-            todoData.dueDate, todoData.notes, todoData.priority);
+            dueDate, todoData.notes, todoData.priority);
         }) : [];
         return new TodoList(listData.id, listData.name, todosArray, listData.icon, listData.editable);
       });

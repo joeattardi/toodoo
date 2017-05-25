@@ -1,12 +1,9 @@
 <div class="toggle-completed-container">
-  <i
-    *ngIf="todo.completed"
-    class="fa fa-lg fa-check-square-o toggle-completed"
-    (click)="toggleTodo()"
-  ></i>
-  <i
-    *ngIf="!todo.completed"
-    class="fa fa-lg fa-square-o toggle-completed"
-    (click)="toggleTodo()"
-  ></i>
+  <div *ngIf="todo.completed" class="toggle-completed todo-completed" (click)="toggleTodo()">
+    <i class="fa fa-check"></i>
+  </div>
+
+  <div *ngIf="!todo.completed" class="toggle-completed todo-active" (click)="toggleTodo()">
+    <i class="fa fa-check"></i>
+  </div>
 </div>

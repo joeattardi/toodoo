@@ -1,6 +1,8 @@
 <div id="add-todo">
   <form #todoForm="ngForm" (ngSubmit)="addTodo(todoForm)">
-    <i class="fa fa-plus"></i>
-    <input id="add-todo-text" type="text" name="text" maxlength="100" placeholder="Add todo..." required ngModel />
+    <div id="add-icon-container" (click)="todoInput.focus()">
+      <i class="fa fa-lg fa-plus"></i>
+    </div>
+    <input id="add-todo-text" type="text" name="text" maxlength="100" placeholder="Add a todo" #todoInput required ngModel />
   </form>
 </div>

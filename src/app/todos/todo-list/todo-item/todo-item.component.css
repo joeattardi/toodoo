@@ -38,6 +38,11 @@
   padding: 0.5em;
   background-color: #FFFFFF;
   border-top: 1px solid #CCCCCC;
+  border-left: 5px solid #FFFFFF;
+}
+
+.todo:hover {
+  background-color: #EEEEEE;
 }
 
 .due-date {
@@ -63,4 +68,8 @@
 
 .priority .fa-arrow-down {
   color: green;
+}
+
+.completed .priority i {
+  color: #999999;
 }

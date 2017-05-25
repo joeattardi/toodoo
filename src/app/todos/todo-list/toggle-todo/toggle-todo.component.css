@@ -1,3 +1,30 @@
-.fa {
+.toggle-completed {
   cursor: pointer;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.toggle-completed i {
+  vertical-align: middle;
+}
+
+.todo-completed {
+  color: #FFFFFF;
+  background-color: #58A258;
+  border: 1px solid #468046;
+}
+
+.todo-active {
+  color: #AAAAAA;
+  border: 1px solid #999999;
+}
+
+.todo-active i {
+  display: none;
+}
+
+.todo-active:hover i {
+  display: inline;
 }

@@ -2,17 +2,46 @@ input {
   width: 95%;
   border: none;
   outline: none;
+  margin-left: 0.5em;
+}
+
+::-webkit-input-placeholder {
+  color: #296BD6;
+}
+
+::-moz-placeholder {
+  color: #296BD6;
+}
+
+:ms-input-placeholder {
+  color: #296BD6;
+}
+
+:-moz-placeholder {
+  color: #296BD6;
 }
 
 form {
   width: 100%;
+  display: flex;
 }
 
-.fa-plus {
-  color: #AAAAAA;
+#add-icon-container {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  text-align: center;
+  border: 1px solid #296BD6;
+  cursor: pointer;
+}
+
+i {
+  color: #296BD6;
+  vertical-align: bottom;
 }
 
 #add-todo {
   background-color: #FFFFFF;
   padding: 0.5em;
+  border-left: 5px solid #FFFFFF;
 }

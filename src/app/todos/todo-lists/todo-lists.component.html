@@ -1,4 +1,6 @@
 <div id="todo-lists-container">
+  <app-header></app-header>
+
   <div id="todo-list-items">
     <app-todo-list-item
       [id]="todoList.name"
@@ -7,8 +9,10 @@
     ></app-todo-list-item>
   </div>
 
-  <a id="add-list" (click)="onAddClicked()">
-    <i class="fa fa-lg fa-plus-square-o" aria-hidden="true"></i>
-    New list
-  </a>
+  <div id="add-list-container">
+    <a id="add-list" (click)="onAddClicked()">
+      <i class="fa fa-lg fa-plus-square-o" aria-hidden="true"></i>
+      New list
+    </a>
+  </div>
 </div>

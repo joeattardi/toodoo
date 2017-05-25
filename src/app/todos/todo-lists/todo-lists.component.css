@@ -1,8 +1,15 @@
 :host {
   width: 300px;
   min-width: 300px;
-  padding: 5px;
   background-color: #FFFFFF;
+}
+
+#todo-list-items {
+  padding: 5px;
+}
+
+#add-list-container {
+  padding: 5px;
 }
 
 #add-list {

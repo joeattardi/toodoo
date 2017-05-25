@@ -1,6 +1,5 @@
-<div>
-  <h3>My Lists</h3>
-  <div class="list-group" id="todo-list-items">
+<div id="todo-lists-container">
+  <div id="todo-list-items">
     <app-todo-list-item
       [id]="todoList.name"
       *ngFor="let todoList of todoLists"
@@ -8,8 +7,8 @@
     ></app-todo-list-item>
   </div>
 
-  <button class="btn btn-primary" id="add-list" (click)="onAddClicked()">
-    <i class="fa fa-plus" aria-hidden="true"></i>
-    Add new list
-  </button>
+  <a id="add-list" (click)="onAddClicked()">
+    <i class="fa fa-lg fa-plus" aria-hidden="true"></i>
+    New list
+  </a>
 </div>

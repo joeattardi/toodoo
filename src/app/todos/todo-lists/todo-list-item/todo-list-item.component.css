@@ -1,3 +1,25 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+a {
+  display: flex;
+  padding: 0.5em 0.25em;
+  text-decoration: none;
+  border-radius: 3px;
+  margin: 2px;
+  color: #333333;
+}
+
+a:hover {
+  background: #EEEEEE;
+}
+
+a.active {
+  background: #E2E6EF;
+}
+
 a .fa-pencil {
   visibility: hidden;
   color: #CCCCCC;
@@ -16,7 +38,9 @@ a:hover .fa-pencil:hover {
 }
 
 .fa {
-  color: #999999;
+  color: #CCCCCC;
+  width: 1.5em;
+  text-align: center;
 }
 
 .todo-list-item {
@@ -28,6 +52,7 @@ a:hover .fa-pencil:hover {
 }
 
 .list-label {
+  flex-grow: 1;
   max-width: 85%;
   white-space: nowrap;
   overflow: hidden;
@@ -40,4 +65,9 @@ a:hover .fa-pencil:hover {
 
 .active-drop-target.active {
   background-color: #3D698E;
+}
+
+.open-todos-count {
+  color: #999999;
+  font-size: 0.75em;
 }

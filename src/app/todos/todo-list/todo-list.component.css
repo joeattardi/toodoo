@@ -1,3 +1,9 @@
+:host {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #EEEEEE;
+}
+
 .list-group {
   margin-top: 1em;
 }

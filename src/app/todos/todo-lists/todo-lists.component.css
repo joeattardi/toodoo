@@ -1,4 +1,22 @@
+:host {
+  width: 30%;
+  padding: 10px;
+  background-color: #FFFFFF;
+}
+
 #add-list {
   display: block;
-  margin: 1em auto;
+  margin: 2px;
+  padding: 0.5em 0.25em;
+  color: #296BD6;
+  cursor: pointer;
+}
+
+#add-list:hover {
+  background-color: #EEEEEE;
+}
+
+#add-list i {
+  width: 1.5em;
+  text-align: center;
 }

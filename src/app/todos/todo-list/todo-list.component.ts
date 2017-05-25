@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import dragula from 'dragula';
+import { Title } from '@angular/platform-browser';
 
 import { TodosService } from '../todos.service';
 import { TodoList } from '../todo-list.model';
@@ -14,7 +14,9 @@ export class TodoListComponent implements OnInit {
   todoList: TodoList;
   showCompletedTodos = false;
 
-  constructor(private route: ActivatedRoute, private todosService: TodosService) { }
+  constructor(private route: ActivatedRoute,
+    private todosService: TodosService,
+    private title: Title) { }
 
   toggleShowCompletedTodos() {
     this.showCompletedTodos = !this.showCompletedTodos;
@@ -23,6 +25,7 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.todoList = this.todosService.getTodoList(params.id);
+      this.title.setTitle(`Toodoo: ${this.todoList.name}`);
     });
   }
 }

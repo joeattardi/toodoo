@@ -1,6 +1,6 @@
-<li
+<div
   #dropTarget
-  class="list-group-item todo"
+  class="todo"
   [class.completed]="todo.completed"
   [draggable]="!todo.completed"
   (dragstart)="onDragStart($event)"
@@ -29,4 +29,4 @@
       (click)="editTodo($event)"
     ></i>
   </div>
-</li>
+</div>

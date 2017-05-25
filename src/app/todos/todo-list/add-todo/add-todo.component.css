@@ -11,3 +11,8 @@ form {
 .fa-plus {
   color: #AAAAAA;
 }
+
+#add-todo {
+  background-color: #FFFFFF;
+  padding: 0.5em;
+}

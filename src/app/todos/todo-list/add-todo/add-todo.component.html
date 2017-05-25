@@ -1,8 +1,6 @@
-<ul class="list-group">
-  <li class="list-group-item">
-    <form #todoForm="ngForm" (ngSubmit)="addTodo(todoForm)">
-      <i class="fa fa-plus"></i>
-      <input id="add-todo-text" type="text" name="text" maxlength="100" placeholder="Add todo..." required ngModel />
-    </form>
-  </li>
-</ul>
+<div id="add-todo">
+  <form #todoForm="ngForm" (ngSubmit)="addTodo(todoForm)">
+    <i class="fa fa-plus"></i>
+    <input id="add-todo-text" type="text" name="text" maxlength="100" placeholder="Add todo..." required ngModel />
+  </form>
+</div>

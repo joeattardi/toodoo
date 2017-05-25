@@ -1,7 +1,11 @@
 :host {
   flex-grow: 1;
-  padding: 10px;
   background-color: #EEEEEE;
+  border-left: 1px solid #CCCCCC;
+}
+
+.todo-list-body {
+  border-bottom: 1px solid #CCCCCC;
 }
 
 .list-group {
@@ -9,9 +13,14 @@
 }
 
 .todo-list-header {
-  margin-bottom: 0.25rem;
+  padding: 1em;
+  padding-top: 2em;
+  background-image: url('/assets/wool.png');
+  color: #FFFFFF;
+  border: 1px solid #000000;
 }
 
 .todo-list-header h3 {
   flex-grow: 1;
+  margin: 0;
 }

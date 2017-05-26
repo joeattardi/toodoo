@@ -1,5 +1,8 @@
 <div class="d-flex align-items-center todo-list-header">
-  <h3>{{ todoList.name }}</h3>
+  <div class="edit-title" *ngIf="editingName">
+    <input #nameInput type="text" [(ngModel)]="listName" (blur)="saveName()" (keyup)="onEditKeyUp($event)">
+  </div>
+  <h3 *ngIf="!editingName" (click)="startEditingName()">{{ todoList.name }}</h3>
   <div>
     <i class="fa fa-2x fa-ellipsis-h" (click)="toggleMenu($event)"></i>
 
@@ -8,7 +11,7 @@
         <i class="fa fa-lg fa-check"></i>
         {{ showCompletedTodos ? 'Hide completed todos' : 'Show completed todos' }}
       </app-menu-item>
-      <app-menu-item>
+      <app-menu-item (click)="startEditingName()">
         <i class="fa fa-lg fa-pencil"></i>
         Rename list
       </app-menu-item>

@@ -1,6 +1,9 @@
 <div class="d-flex align-items-center todo-list-header">
   <h3>{{ todoList.name }}</h3>
   <div>
+    <!-- <button>
+      <i class="fa fa-ellipsis-v"></i>
+    </button> -->
     <button class="btn btn-primary btn-sm" (click)="toggleShowCompletedTodos()">
       {{ showCompletedTodos ? 'Hide completed todos' : 'Show completed todos' }}
     </button>

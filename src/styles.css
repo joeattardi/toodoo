@@ -1,5 +1,11 @@
 button {
   cursor: pointer;
+  color: #FFFFFF;
+  background-color: #275DBF;
+  border-radius: 5px;
+  border: 1px solid #2352A9;
+  padding: 0.25em 1em;
+  outline: none;
 }
 
 .has-danger .toggle-completed-container i {

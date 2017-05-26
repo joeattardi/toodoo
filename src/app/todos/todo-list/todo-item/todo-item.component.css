@@ -43,6 +43,7 @@
 
 .todo:hover {
   background-color: #EEEEEE;
+  border-left: 5px solid #EEEEEE;
 }
 
 .due-date {

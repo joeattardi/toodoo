@@ -9,16 +9,22 @@
   (dragover)="onDragOver($event)"
   (drop)="onDrop($event)"
   (dragleave)="onDragLeave($event)"
+  (contextmenu)="onRightClick($event)"
   [id]="'list-' + todoList.id"
 >
   <span class="list-label"><i [class]="'fa fa-lg ' + todoList.icon" aria-hidden="true"></i> {{ todoList.name }}</span>
   <div>
-    <i
-      [class.uneditable]="!todoList.editable"
-      (click)="editList($event)"
-      class="fa fa-pencil"
-      aria-hidden="true"
-    ></i>
     <span *ngIf="openTodosCount > 0" class="open-todos-count">{{ openTodosCount }}</span>
   </div>
+
+  <app-menu #popupMenu [hidden]="!showMenu">
+    <app-menu-item>
+      <i class="fa fa-lg fa-pencil"></i>
+      Rename list
+    </app-menu-item>
+    <app-menu-item class="delete-list">
+      <i class="fa fa-lg fa-trash delete-list"></i>
+      Delete list
+    </app-menu-item>
+  </app-menu>
 </a>

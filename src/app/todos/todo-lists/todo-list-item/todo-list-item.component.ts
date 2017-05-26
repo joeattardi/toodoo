@@ -14,17 +14,39 @@ import { TodosService } from '../../todos.service';
 export class TodoListItemComponent implements OnInit {
   @Input() todoList: TodoList;
   @ViewChild('dropTarget') dropTarget;
+  @ViewChild('popupMenu') popupMenu;
+
+  showMenu = false;
 
   private moveMarker: HTMLElement;
 
   constructor(private modalService: NgbModal,
     private dndService: DragDropService,
-    private todosService: TodosService) { }
+    private todosService: TodosService) {
+      this.hideMenu = this.hideMenu.bind(this);
+    }
 
   ngOnInit() {
     this.moveMarker = document.createElement('div');
     this.moveMarker.className = 'move-marker';
     this.moveMarker.innerHTML = '<i class="fa fs-lg fa-arrow-right"></i>';
+  }
+
+  hideMenu() {
+    document.removeEventListener('click', this.hideMenu);
+    this.showMenu = false;
+  }
+
+  onRightClick(event) {
+    event.preventDefault();
+    if (this.todoList.editable) {
+      this.showMenu = true;
+      const menuElement = this.popupMenu.menu.nativeElement;
+      menuElement.style.top = `${event.clientY}px`;
+      menuElement.style.left = `${event.clientX}px`;
+
+      document.addEventListener('click', this.hideMenu);
+    }
   }
 
   onDragStart(event: DragEvent) {

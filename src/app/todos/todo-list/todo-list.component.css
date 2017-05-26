@@ -24,3 +24,11 @@
   flex-grow: 1;
   margin: 0;
 }
+
+.fa {
+  cursor: pointer;
+}
+
+.delete-list {
+  color: #C74B4B;
+}

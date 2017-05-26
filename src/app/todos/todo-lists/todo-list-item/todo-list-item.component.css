@@ -20,22 +20,6 @@ a.active {
   background: #E2E6EF;
 }
 
-a .fa-pencil {
-  visibility: hidden;
-  color: #CCCCCC;
-}
-
-a:hover .fa-pencil {
-  visibility: visible;
-}
-
-a:hover .fa-pencil.uneditable {
-  visibility: hidden;
-}
-
-a:hover .fa-pencil:hover {
-  color: #999999;
-}
 
 .fa {
   color: #CCCCCC;
@@ -70,4 +54,13 @@ a:hover .fa-pencil:hover {
 .open-todos-count {
   color: #999999;
   font-size: 0.75em;
+  margin-left: 10px;
+}
+
+.fa-pencil {
+  color: #000000;
+}
+
+.delete-list {
+  color: #C74B4B;
 }

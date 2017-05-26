@@ -1,12 +1,23 @@
 <div class="d-flex align-items-center todo-list-header">
   <h3>{{ todoList.name }}</h3>
   <div>
-    <!-- <button>
-      <i class="fa fa-ellipsis-v"></i>
-    </button> -->
-    <button class="btn btn-primary btn-sm" (click)="toggleShowCompletedTodos()">
-      {{ showCompletedTodos ? 'Hide completed todos' : 'Show completed todos' }}
-    </button>
+    <i class="fa fa-2x fa-ellipsis-h" (click)="toggleMenu($event)"></i>
+
+    <app-menu #menu [hidden]="!showMenu">
+      <app-menu-item (click)="toggleShowCompletedTodos()">
+        <i class="fa fa-lg fa-check"></i>
+        {{ showCompletedTodos ? 'Hide completed todos' : 'Show completed todos' }}
+      </app-menu-item>
+      <app-menu-item>
+        <i class="fa fa-lg fa-pencil"></i>
+        Rename list
+      </app-menu-item>
+      <app-menu-item class="delete-list">
+        <i class="fa fa-lg fa-trash"></i>
+        Delete list
+      </app-menu-item>
+    </app-menu>
+
   </div>
 </div>
 

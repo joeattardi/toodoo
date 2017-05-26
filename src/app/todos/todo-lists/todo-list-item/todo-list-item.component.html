@@ -17,7 +17,7 @@
     <span *ngIf="openTodosCount > 0" class="open-todos-count">{{ openTodosCount }}</span>
   </div>
 
-  <app-menu #popupMenu [hidden]="!showMenu">
+  <app-menu #popupMenu>
     <app-menu-item>
       <i class="fa fa-lg fa-pencil"></i>
       Rename list

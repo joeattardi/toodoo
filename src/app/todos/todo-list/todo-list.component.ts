@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 
 import { TodosService } from '../todos.service';
 import { TodoList } from '../todo-list.model';
+import { MenuComponent } from '../../menu/menu.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -13,32 +14,26 @@ import { TodoList } from '../todo-list.model';
 export class TodoListComponent implements OnInit {
   todoList: TodoList;
   showCompletedTodos = false;
-  showMenu = false;
 
-  @ViewChild('menu') menu;
+  @ViewChild('menu') menu: MenuComponent;
 
   constructor(private route: ActivatedRoute,
     private todosService: TodosService,
-    private title: Title) {
-      this.hideMenu = this.hideMenu.bind(this);
-    }
+    private title: Title) { }
 
   toggleShowCompletedTodos() {
     this.showCompletedTodos = !this.showCompletedTodos;
   }
 
-  hideMenu() {
-    this.showMenu = false;
-    document.removeEventListener('click', this.hideMenu);
-  }
-
   toggleMenu(event) {
     event.stopPropagation();
-    this.showMenu = !this.showMenu;
 
-    if (this.showMenu) {
-      document.addEventListener('click', this.hideMenu);
-      this.menu.menu.nativeElement.style.right = '0';
+    if (this.menu.hidden) {
+      this.menu.showMenu({
+        right: '0'
+      });
+    } else {
+      this.menu.hideMenu();
     }
   }
 

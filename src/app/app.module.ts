@@ -23,6 +23,7 @@ import { EditTodoComponent } from './todos/todo-list/edit-todo/edit-todo.compone
 import { ToggleTodoComponent } from './todos/todo-list/toggle-todo/toggle-todo.component';
 import { MenuComponent } from './menu/menu.component';
 import { MenuItemComponent } from './menu/menu-item/menu-item.component';
+import { ModalComponent } from './modal/modal.component';
 
 const appRoutes: Routes = [
   { path: 'lists', component: TodosComponent, children: [
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
     EditTodoComponent,
     ToggleTodoComponent,
     MenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    ModalComponent
   ],
   entryComponents: [
     AddTodoListComponent,

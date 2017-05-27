@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { EditTodoListComponent } from '../edit-todo-list/edit-todo-list.component';
 import { TodoList } from '../../todo-list.model';
 import { DragDropService, Region } from '../../../drag-drop.service';
 import { TodosService } from '../../todos.service';

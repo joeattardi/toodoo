@@ -4,7 +4,6 @@ import shortid from 'shortid';
 
 import { TodoList } from '../todo-list.model';
 import { TodosService } from '../todos.service';
-import { AddTodoListComponent } from './add-todo-list/add-todo-list.component';
 
 @Component({
   selector: 'app-todo-lists',

@@ -37,13 +37,10 @@
 
 <div class="todo-list-body">
   <app-add-todo [todoList]="todoList"></app-add-todo>
-  <div id="active-todos">
-    <app-todo-item *ngFor="let todo of todoList.getActiveTodos()" [todo]="todo" [todoList]="todoList">
-    </app-todo-item>
-  </div>
-
-  <div id="completed-todos" *ngIf="showCompletedTodos">
-    <app-todo-item *ngFor="let todo of todoList.getCompletedTodos()" [todo]="todo" [todoList]="todoList">
-    </app-todo-item>
+  <div id="todos">
+    <div *ngFor="let todo of todoList.todos">
+      <app-todo-item *ngIf="!todo.completed || showCompletedTodos" [todo]="todo" [todoList]="todoList">
+      </app-todo-item>
+    </div>
   </div>
 </div>

@@ -16,9 +16,6 @@ import { SelectListComponent } from './todos/select-list/select-list.component';
 import { TodoListComponent } from './todos/todo-list/todo-list.component';
 import { TodoItemComponent } from './todos/todo-list/todo-item/todo-item.component';
 import { AddTodoComponent } from './todos/todo-list/add-todo/add-todo.component';
-import { AddTodoListComponent } from './todos/todo-lists/add-todo-list/add-todo-list.component';
-import { EditTodoListComponent } from './todos/todo-lists/edit-todo-list/edit-todo-list.component';
-import { EditTodoComponent } from './todos/todo-list/edit-todo/edit-todo.component';
 import { ToggleTodoComponent } from './todos/todo-list/toggle-todo/toggle-todo.component';
 import { MenuComponent } from './menu/menu.component';
 import { MenuItemComponent } from './menu/menu-item/menu-item.component';
@@ -43,18 +40,10 @@ const appRoutes: Routes = [
     TodoListComponent,
     TodoItemComponent,
     AddTodoComponent,
-    AddTodoListComponent,
-    EditTodoListComponent,
-    EditTodoComponent,
     ToggleTodoComponent,
     MenuComponent,
     MenuItemComponent,
     ModalComponent
-  ],
-  entryComponents: [
-    AddTodoListComponent,
-    EditTodoListComponent,
-    EditTodoComponent
   ],
   imports: [
     BrowserModule,

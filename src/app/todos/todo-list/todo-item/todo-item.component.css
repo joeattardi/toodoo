@@ -34,17 +34,18 @@
   justify-content: center;
 }
 
-.todo-container .fa-pencil {
+.todo-container .fa-trash-o {
   visibility: hidden;
   cursor: pointer;
-  color: #CCCCCC;
+  color: #A02929;
+  align-self: center;
 }
 
-.todo-container:hover .fa-pencil:hover {
-  color: #999999;
+.todo-container:hover .fa-trash-o:hover {
+  color: #7B1E1E;
 }
 
-.todo-container:hover .fa-pencil {
+.todo-container:hover .fa-trash-o {
   visibility: visible;
 }
 
@@ -58,6 +59,10 @@
 .todo:hover {
   background-color: #EEEEEE;
   border-left: 5px solid #EEEEEE;
+}
+
+.todo.overdue:hover {
+  border-left: 5px solid red;
 }
 
 .due-date {
@@ -87,4 +92,13 @@
 
 .completed .priority i {
   color: #999999;
+}
+
+.edit-todo-row {
+  display: flex;
+}
+
+.edit-todo-row input {
+  margin-left: 0.5em;
+  width: 100%;
 }

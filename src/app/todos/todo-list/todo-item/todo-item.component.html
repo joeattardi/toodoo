@@ -2,30 +2,29 @@
   #dropTarget
   class="todo"
   [class.completed]="todo.completed"
-  [draggable]="!todo.completed"
+  draggable="true"
   (dragstart)="onDragStart($event)"
   (drop)="onDrop($event)"
   (dragover)="onDragOver($event)"
-  [class.overdue]="todo.isOverdue() && !todo.completed"
 >
   <div class="todo-container">
     <div class="todo-controls">
       <app-toggle-todo [todo]="todo"></app-toggle-todo>
-      <div class="priority">
-        <i *ngIf="todo.priority === priorityEnum.HIGH || todo.priority === priorityEnum.LOW"
-          class="fa fa-sm"
-          [class.fa-arrow-up]="todo.priority === priorityEnum.HIGH"
-          [class.fa-arrow-down]="todo.priority === priorityEnum.LOW"
-        ></i>
-      </div>
     </div>
-    <div class="todo-text" (dblclick)="editTodo($event)">
+    <div class="todo-text">
       <div>{{ todo.text }}</div>
-      <small class="due-date">{{ todo.dueDate | date }}</small>
     </div>
-    <i
-      class="fa fa-pencil align-self-center"
-      (click)="editTodo($event)"
-    ></i>
+    <i class="fa fa-lg fa-trash-o" (click)="confirmDelete()"></i>
   </div>
 </div>
+
+<app-modal #confirmDeleteModal>
+  <div class="modal-title">Delete Todo</div>
+  <div class="modal-body">
+    Are you sure you want to delete the todo <strong>{{ todo.text }}</strong>?
+  </div>
+  <div class="modal-buttons">
+    <button (click)="cancelDelete()">Cancel</button>
+    <button (click)="deleteTodo()" class="danger">Delete</button>
+  </div>
+</app-modal>

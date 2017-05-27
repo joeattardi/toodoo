@@ -1,11 +1,11 @@
 import { Component, Input, ViewChild } from '@angular/core';
 
 import { TodosService } from '../../todos.service';
-import { EditTodoComponent } from '../edit-todo/edit-todo.component';
 import { Todo } from '../../todo.model';
 import { TodoList } from '../../todo-list.model';
 import { Priority } from '../../priority.enum';
 import { DragDropService, Region } from '../../../drag-drop.service';
+import { ModalComponent } from '../../../modal/modal.component';
 
 @Component({
   selector: 'app-todo-item',
@@ -17,6 +17,7 @@ export class TodoItemComponent {
   @Input() todoList: TodoList;
 
   @ViewChild('dropTarget') dropTarget;
+  @ViewChild('confirmDeleteModal') confirmDeleteModal: ModalComponent;
 
   priorityEnum = Priority;
 
@@ -27,6 +28,20 @@ export class TodoItemComponent {
     this.todo.completed = !this.todo.completed;
   }
 
+  confirmDelete() {
+    this.confirmDeleteModal.showModal();
+  }
+
+  cancelDelete() {
+    this.confirmDeleteModal.hideModal();
+  }
+
+  deleteTodo() {
+    this.todoList.todos = this.todoList.todos.filter(todo => todo !== this.todo);
+    this.todosService.saveTodos();
+    this.confirmDeleteModal.hideModal();
+  }
+
   onDragStart(event: DragEvent) {
     this.dndService.currentDraggedItem = <Element> event.target;
     (<any>event.dataTransfer).setDragImage(event.target, 0, 0);
@@ -35,7 +50,7 @@ export class TodoItemComponent {
   }
 
   onDragOver(event: DragEvent) {
-    if (this.dndService.currentDraggedItem.classList.contains('todo') && !this.todo.completed) {
+    if (this.dndService.currentDraggedItem.classList.contains('todo')) {
       event.preventDefault();
     }
   }
@@ -44,20 +59,10 @@ export class TodoItemComponent {
     const todoId = event.dataTransfer.getData('todoId');
     const todo = this.todoList.todos.find(t => t.id === todoId);
     const srcIndex = this.todoList.todos.indexOf(todo);
-    const destIndex = this.todoList.getActiveTodos().indexOf(this.todo);
+    const destIndex = this.todoList.todos.indexOf(this.todo);
 
-    if (!todo.completed && !this.todo.completed) {
-      this.todoList.todos.splice(srcIndex, 1);
-      this.todoList.todos.splice(destIndex, 0, todo);
-      this.todosService.saveTodos();
-    }
-  }
-
-  editTodo(event: MouseEvent) {
-    event.stopPropagation();
-    event.preventDefault();
-
-    document.getElementById('add-todo-text').blur();
-
+    this.todoList.todos.splice(srcIndex, 1);
+    this.todoList.todos.splice(destIndex, 0, todo);
+    this.todosService.saveTodos();
   }
 }

@@ -1,3 +1,8 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
 button {
   cursor: pointer;
   color: #000000;
@@ -6,12 +11,17 @@ button {
   border: 1px solid #999999;
   padding: 0.25em 1em;
   outline: none;
+  font-size: 1em;
 }
 
 button.danger {
   background-color: #A02929;
   border: 1px solid #7B1E1E;
   color: #FFFFFF;
+}
+
+input {
+  font-size: 1em;
 }
 
 .has-danger .toggle-completed-container i {

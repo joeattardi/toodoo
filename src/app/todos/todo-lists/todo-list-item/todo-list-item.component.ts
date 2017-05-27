@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { EditTodoListComponent } from '../edit-todo-list/edit-todo-list.component';
 import { TodoList } from '../../todo-list.model';
@@ -21,8 +20,7 @@ export class TodoListItemComponent implements OnInit {
 
   private moveMarker: HTMLElement;
 
-  constructor(private modalService: NgbModal,
-    private dndService: DragDropService,
+  constructor(private dndService: DragDropService,
     private todosService: TodosService) { }
 
   ngOnInit() {
@@ -96,8 +94,5 @@ export class TodoListItemComponent implements OnInit {
 
     event.stopPropagation();
     event.preventDefault();
-
-    const modalRef = this.modalService.open(EditTodoListComponent);
-    modalRef.componentInstance.todoList = this.todoList;
   }
 }

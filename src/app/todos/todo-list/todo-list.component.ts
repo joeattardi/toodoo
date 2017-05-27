@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { TodosService } from '../todos.service';
 import { TodoList } from '../todo-list.model';
 import { MenuComponent } from '../../menu/menu.component';
+import { ModalComponent } from '../../modal/modal.component';
 
 const KEY_ENTER = 13;
 const KEY_ESCAPE = 27;
@@ -22,13 +23,31 @@ export class TodoListComponent implements OnInit {
 
   @ViewChild('menu') menu: MenuComponent;
   @ViewChild('nameInput') nameInput: ElementRef;
+  @ViewChild('confirmDeleteModal') confirmDeleteModal: ModalComponent;
 
   constructor(private route: ActivatedRoute,
     private todosService: TodosService,
+    private router: Router,
     private title: Title) { }
 
   toggleShowCompletedTodos() {
     this.showCompletedTodos = !this.showCompletedTodos;
+  }
+
+  showConfirmDeleteModal() {
+    this.confirmDeleteModal.showModal();
+  }
+
+  hideConfirmDeleteModal() {
+    this.confirmDeleteModal.hideModal();
+  }
+
+  deleteTodoList() {
+    this.confirmDeleteModal.hideModal();
+    const index = this.todosService.indexOfList(this.todoList);
+    const previousList = this.todosService.getTodoLists()[index - 1];
+    this.todosService.deleteTodoList(this.todoList);
+    this.router.navigate(['/lists', previousList.id]);
   }
 
   startEditingName() {

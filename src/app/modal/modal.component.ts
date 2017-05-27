@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
+  hidden = true;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  showModal() {
+    this.hidden = false;
+  }
+
+  hideModal() {
+    this.hidden = true;
   }
 
 }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TodoList } from '../todo-list.model';
 import { TodosService } from '../todos.service';
@@ -11,10 +10,10 @@ import { AddTodoListComponent } from './add-todo-list/add-todo-list.component';
   styleUrls: ['./todo-lists.component.css']
 })
 export class TodoListsComponent {
-  constructor(private todosService: TodosService, private modalService: NgbModal) { }
+  constructor(private todosService: TodosService) { }
 
   onAddClicked() {
-    this.modalService.open(AddTodoListComponent);
+    // this.modalService.open(AddTodoListComponent);
   }
 
   get todoLists() {

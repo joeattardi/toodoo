@@ -1,4 +1,4 @@
-<div class="d-flex align-items-center todo-list-header">
+<div class="todo-list-header">
   <div class="edit-title" *ngIf="editingName">
     <input #nameInput type="text" [(ngModel)]="listName" (blur)="saveName()" (keyup)="onEditKeyUp($event)">
   </div>
@@ -11,23 +11,23 @@
         <i class="fa fa-lg fa-check"></i>
         {{ showCompletedTodos ? 'Hide completed todos' : 'Show completed todos' }}
       </app-menu-item>
-      <app-menu-item (click)="startEditingName()">
+      <app-menu-item (click)="startEditingName()" *ngIf="todoList.editable">
         <i class="fa fa-lg fa-pencil"></i>
         Rename list
       </app-menu-item>
-      <app-menu-item class="delete-list">
+      <app-menu-item class="delete-list" (click)="showConfirmDeleteModal()" *ngIf="todoList.editable">
         <i class="fa fa-lg fa-trash"></i>
         Delete list
       </app-menu-item>
     </app-menu>
 
-    <app-modal>
+    <app-modal #confirmDeleteModal>
       <div class="modal-body">
         Are you sure you want to delete the list <strong>{{ todoList.name }}</strong>?
       </div>
       <div class="modal-buttons">
-        <button>Cancel</button>
-        <button class="danger">Delete</button>
+        <button (click)="hideConfirmDeleteModal()">Cancel</button>
+        <button (click)="deleteTodoList()" class="danger">Delete</button>
       </div>
     </app-modal>
 

@@ -1,5 +1,4 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TodosService } from '../../todos.service';
 import { EditTodoComponent } from '../edit-todo/edit-todo.component';
@@ -21,8 +20,7 @@ export class TodoItemComponent {
 
   priorityEnum = Priority;
 
-  constructor(private modalService: NgbModal,
-    private dndService: DragDropService,
+  constructor(private dndService: DragDropService,
     private todosService: TodosService) { }
 
   toggleTodo() {
@@ -61,19 +59,5 @@ export class TodoItemComponent {
 
     document.getElementById('add-todo-text').blur();
 
-    const modalRef = this.modalService.open(EditTodoComponent);
-    modalRef.componentInstance.todo = this.todo;
-    modalRef.componentInstance.todoList = this.todoList;
-  }
-
-  get priorityTooltip() {
-    switch (this.todo.priority) {
-      case Priority.HIGH:
-        return 'High priority';
-      case Priority.LOW:
-        return 'Low priority';
-      default:
-        return '';
-    }
   }
 }

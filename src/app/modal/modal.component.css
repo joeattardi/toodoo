@@ -10,10 +10,14 @@
 .modal-container {
   background: #EEEEEE;
   color: #000000;
-  padding: 2em;
+  padding: 1em;
   border-radius: 5px;
   width: 500px;
   margin: 5em auto;
+}
+
+.modal-body {
+  padding: 1em;
 }
 
 .modal-buttons {

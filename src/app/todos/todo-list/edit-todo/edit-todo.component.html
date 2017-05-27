@@ -41,8 +41,6 @@
             name="dueDate"
             id="dueDate"
             [(ngModel)]="dueDate"
-            ngbDatepicker
-            #dueDatePicker="ngbDatepicker"
           >
           <div class="input-group-addon" (click)="dueDatePicker.toggle()">
             <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -68,7 +66,6 @@
       <button type="button" (click)="delete.close()" class="btn btn-secondary btn-sm">Cancel</button>
       <button type="button" (click)="onDelete()" class="btn btn-danger btn-sm">Delete</button>
     </ng-template>
-    <button type="button" class="btn btn-danger" #delete="ngbPopover" [ngbPopover]="confirmDelete">Delete Todo</button>
     <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
     <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Save</button>
   </div>

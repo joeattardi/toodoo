@@ -18,11 +18,14 @@
   background-image: url('/assets/wool.png');
   color: #FFFFFF;
   border: 1px solid #000000;
+  display: flex;
+  align-items: center;
 }
 
 .todo-list-header h3 {
   flex-grow: 1;
   margin: 0;
+  font-size: 1.75rem;
 }
 
 .todo-list-header .edit-title {

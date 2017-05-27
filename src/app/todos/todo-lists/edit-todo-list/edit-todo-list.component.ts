@@ -18,18 +18,12 @@ export class EditTodoListComponent implements OnInit {
   name: string;
 
   constructor(
-    private activeModal: NgbActiveModal,
     private todosService: TodosService,
     private router: Router) { }
-
-  onCancel() {
-    this.activeModal.close();
-  }
 
   onEdit(editForm: NgForm) {
     this.todoList.name = editForm.value.name;
     this.todosService.saveTodos();
-    this.activeModal.close();
   }
 
   onDelete() {
@@ -38,7 +32,6 @@ export class EditTodoListComponent implements OnInit {
 
     this.todosService.deleteTodoList(this.todoList);
     this.todosService.saveTodos();
-    this.activeModal.close();
     this.router.navigate(['/lists', previousList.id]);
   }
 

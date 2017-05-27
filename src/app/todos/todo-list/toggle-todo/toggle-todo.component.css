@@ -8,6 +8,7 @@
 
 .toggle-completed i {
   vertical-align: middle;
+  margin: 25%;
 }
 
 .todo-completed {
@@ -23,8 +24,9 @@
 
 .todo-active i {
   display: none;
+  margin: 25%;
 }
 
 .todo-active:hover i {
-  display: inline;
+  display: block;
 }

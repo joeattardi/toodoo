@@ -1,5 +1,6 @@
 nav {
   background-image: url('/assets/wool.png');
   color: #FFFFFF;
-  padding: 1em;
+  padding: 1em 0.25em;
+  font-size: 1.25em;
 }

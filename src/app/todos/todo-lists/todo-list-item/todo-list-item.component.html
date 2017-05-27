@@ -9,7 +9,6 @@
   (dragover)="onDragOver($event)"
   (drop)="onDrop($event)"
   (dragleave)="onDragLeave($event)"
-  (contextmenu)="onRightClick($event)"
   [id]="'list-' + todoList.id"
 >
   <span class="list-label"><i [class]="'fa fa-lg ' + todoList.icon" aria-hidden="true"></i> {{ todoList.name }}</span>
@@ -25,6 +24,7 @@
   </app-menu>
 
   <app-modal #confirmDeleteModal>
+    <div class="modal-title">Delete List</div>
     <div class="modal-body">
       Are you sure you want to delete the list <strong>{{ todoList.name }}</strong>?
     </div>

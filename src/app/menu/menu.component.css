@@ -7,6 +7,7 @@
   border-radius: 3px;
   box-shadow: 1px 1px 5px #AAAAAA;
   font-size: 0.8em;
+  min-width: 200px;
 }
 
 hr {

@@ -47,6 +47,7 @@ export class TodoListComponent implements OnInit {
     const index = this.todosService.indexOfList(this.todoList);
     const previousList = this.todosService.getTodoLists()[index - 1];
     this.todosService.deleteTodoList(this.todoList);
+    this.todosService.saveTodos();
     this.router.navigate(['/lists', previousList.id]);
   }
 

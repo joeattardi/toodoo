@@ -1,10 +1,12 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { EditTodoListComponent } from '../edit-todo-list/edit-todo-list.component';
 import { TodoList } from '../../todo-list.model';
 import { DragDropService, Region } from '../../../drag-drop.service';
 import { TodosService } from '../../todos.service';
 import { MenuComponent } from '../../../menu/menu.component';
+import { ModalComponent } from '../../../modal/modal.component';
 
 @Component({
   selector: 'app-todo-list-item',
@@ -15,18 +17,37 @@ export class TodoListItemComponent implements OnInit {
   @Input() todoList: TodoList;
   @ViewChild('dropTarget') dropTarget;
   @ViewChild('popupMenu') popupMenu: MenuComponent;
+  @ViewChild('confirmDeleteModal') confirmDeleteModal: ModalComponent;
 
   showMenu = false;
 
   private moveMarker: HTMLElement;
 
   constructor(private dndService: DragDropService,
+    private router: Router,
     private todosService: TodosService) { }
 
   ngOnInit() {
     this.moveMarker = document.createElement('div');
     this.moveMarker.className = 'move-marker';
     this.moveMarker.innerHTML = '<i class="fa fs-lg fa-arrow-right"></i>';
+  }
+
+  showConfirmDeleteModal() {
+    this.confirmDeleteModal.showModal();
+  }
+
+  hideConfirmDeleteModal() {
+    this.confirmDeleteModal.hideModal();
+  }
+
+  deleteTodoList() {
+    this.confirmDeleteModal.hideModal();
+    const index = this.todosService.indexOfList(this.todoList);
+    const previousList = this.todosService.getTodoLists()[index - 1];
+    this.todosService.deleteTodoList(this.todoList);
+    this.todosService.saveTodos();
+    this.router.navigate(['/lists', previousList.id]);
   }
 
   onRightClick(event) {

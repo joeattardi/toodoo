@@ -1,5 +1,8 @@
 <div class="modal-overlay" [hidden]="hidden">
   <div class="modal-container">
+    <div class="modal-header">
+      <h4><ng-content select=".modal-title"></ng-content></h4>
+    </div>
     <div class="modal-body">
       <ng-content select=".modal-body"></ng-content>
     </div>

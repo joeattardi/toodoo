@@ -18,9 +18,19 @@
   </div>
 
   <app-menu #popupMenu>
-    <app-menu-item class="delete-list">
+    <app-menu-item class="delete-list" (click)="showConfirmDeleteModal()">
       <i class="fa fa-lg fa-trash delete-list"></i>
       Delete list
     </app-menu-item>
   </app-menu>
+
+  <app-modal #confirmDeleteModal>
+    <div class="modal-body">
+      Are you sure you want to delete the list <strong>{{ todoList.name }}</strong>?
+    </div>
+    <div class="modal-buttons">
+      <button (click)="hideConfirmDeleteModal()">Cancel</button>
+      <button (click)="deleteTodoList()" class="danger">Delete</button>
+    </div>
+  </app-modal>
 </a>

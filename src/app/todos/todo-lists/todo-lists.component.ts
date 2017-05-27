@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import shortid from 'shortid';
 
 import { TodoList } from '../todo-list.model';
 import { TodosService } from '../todos.service';
@@ -13,7 +14,8 @@ export class TodoListsComponent {
   constructor(private todosService: TodosService) { }
 
   onAddClicked() {
-    // this.modalService.open(AddTodoListComponent);
+    this.todosService.addTodoList(new TodoList(shortid.generate(), 'New List', []));
+    this.todosService.saveTodos();
   }
 
   get todoLists() {

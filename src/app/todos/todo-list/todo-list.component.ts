@@ -1,7 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/map'
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Title } from '@angular/platform-browser';
 
+import { AppState } from '../../store/app-state';
 import { TodosService } from '../todos.service';
 import { TodoList } from '../todo-list.model';
 import { MenuComponent } from '../../menu/menu.component';
@@ -17,6 +22,7 @@ const KEY_ESCAPE = 27;
 })
 export class TodoListComponent implements OnInit {
   todoList: TodoList;
+  subscription: Subscription;
   showCompletedTodos = false;
   editingName = false;
   listName: string;
@@ -28,7 +34,8 @@ export class TodoListComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private todosService: TodosService,
     private router: Router,
-    private title: Title) { }
+    private title: Title,
+    private store: Store<AppState>) { }
 
   toggleShowCompletedTodos() {
     this.showCompletedTodos = !this.showCompletedTodos;
@@ -43,12 +50,12 @@ export class TodoListComponent implements OnInit {
   }
 
   deleteTodoList() {
-    this.confirmDeleteModal.hideModal();
-    const index = this.todosService.indexOfList(this.todoList);
-    const previousList = this.todosService.getTodoLists()[index - 1];
-    this.todosService.deleteTodoList(this.todoList);
-    this.todosService.saveTodos();
-    this.router.navigate(['/lists', previousList.id]);
+    // this.confirmDeleteModal.hideModal();
+    // const index = this.todosService.indexOfList(this.todoList);
+    // const previousList = this.todosService.getTodoLists()[index - 1];
+    // this.todosService.deleteTodoList(this.todoList);
+    // this.todosService.saveTodos();
+    // this.router.navigate(['/lists', previousList.id]);
   }
 
   startEditingName() {
@@ -60,18 +67,18 @@ export class TodoListComponent implements OnInit {
   }
 
   onEditKeyUp(event: KeyboardEvent) {
-    if (event.keyCode === KEY_ENTER) {
-      this.saveName();
-    } else if (event.keyCode === KEY_ESCAPE) {
-      this.editingName = false;
-      this.listName = this.todoList.name;
-    }
+    // if (event.keyCode === KEY_ENTER) {
+    //   this.saveName();
+    // } else if (event.keyCode === KEY_ESCAPE) {
+    //   this.editingName = false;
+    //   this.listName = this.todoList.name;
+    // }
   }
 
   saveName() {
     this.todoList.name = this.listName;
     this.editingName = false;
-    this.todosService.saveTodos();
+    // this.todosService.saveTodos();
   }
 
   toggleMenu(event) {
@@ -88,9 +95,20 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.todoList = this.todosService.getTodoList(params.id);
-      this.listName = this.todoList.name;
-      this.title.setTitle(`Toodoo: ${this.todoList.name}`);
+      const store = this.store.select('todos')
+        .map((todos: TodoList[]) => {
+          return todos.find(todoList => todoList.id === params.id);
+        });
+
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+
+        this.subscription = store.subscribe(todoList => {
+          this.todoList = todoList;
+          this.listName = todoList.name;
+          this.title.setTitle(`Toodoo: ${todoList.name}`);
+        });
     });
   }
 }

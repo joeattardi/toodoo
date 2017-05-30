@@ -4,7 +4,7 @@
   <div id="todo-list-items">
     <app-todo-list-item
       [id]="todoList.name"
-      *ngFor="let todoList of todoLists"
+      *ngFor="let todoList of todoLists | async"
       [todoList]="todoList"
     ></app-todo-list-item>
   </div>

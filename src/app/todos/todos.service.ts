@@ -13,10 +13,11 @@ export class TodosService {
   }
 
   loadTodos() {
+    let todoLists;
     const storedValue = localStorage.getItem('toodoo');
     if (storedValue) {
       const rawTodoData = JSON.parse(storedValue);
-      this.todoLists = rawTodoData.map(listData => {
+      todoLists = rawTodoData.map(listData => {
         const todosArray = listData.todos ? listData.todos.map(todoData => {
           let dueDate;
           if (todoData.dueDate) {
@@ -29,11 +30,13 @@ export class TodosService {
         return new TodoList(listData.id, listData.name, todosArray, listData.icon, listData.editable);
       });
     } else {
-      this.todoLists = [
+      todoLists = [
         new TodoList('inbox', 'Inbox', [], 'fa-inbox', false)
       ];
       this.saveTodos();
     }
+
+    return todoLists;
   }
 
   saveTodos() {

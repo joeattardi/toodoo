@@ -1,5 +1,10 @@
+import { Store } from '@ngrx/store';
+
 import { Component, OnInit } from '@angular/core';
 import { TodosService } from './todos/todos.service';
+
+import { AppState } from './store/app-state';
+import { LOAD_TODOS } from './store/actions';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +12,13 @@ import { TodosService } from './todos/todos.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private todosService: TodosService) { }
+  constructor(private todosService: TodosService, private store: Store<AppState>) { }
 
   ngOnInit() {
-    this.todosService.loadTodos();
+    const todoLists = this.todosService.loadTodos();
+    this.store.dispatch({
+      type: LOAD_TODOS,
+      payload: todoLists
+    });
   }
 }

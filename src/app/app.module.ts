@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
 
+import { todos } from './store';
 import { AppComponent } from './app.component';
 import { TodosService } from './todos/todos.service';
 import { DragDropService } from './drag-drop.service';
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    StoreModule.provideStore({ todos })
   ],
   providers: [TodosService, DragDropService, MenuService],
   bootstrap: [AppComponent]
